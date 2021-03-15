@@ -22,6 +22,7 @@ let mysqlConnection = mysql.createConnection({
   multipleStatements: true
 })
 
+
 mysqlConnection.connect((err)=>{
   if(!err)
   console.log('Db Connected')
@@ -39,7 +40,7 @@ app.listen(port, () => {
 
 
 
-
+//GET A LOCATION
 app.get('/location', (req, res) => {
   mysqlConnection.query('Select * from buildings',(err,rows,fields)=>{
 
