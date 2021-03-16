@@ -76,7 +76,21 @@ app.get('/user/:id_user', (req, res) => {
   })
 })
 
+app.post('/user', (req, res) => {
+  let emp = req.body;
+  var sql = "SET @id_user = ?;SET @user_name = ?;SET @password = ?; \
+  CALL UserAdd(@id_user,@user_name,@password);";
+  mysqlConnection.query(sql, [emp.id_user, emp.user_name, emp.password], (err, rows, fields) => {
+      if (!err)
+          rows.forEach(element => {
+              if(element.constructor == Array)
+              res.send('User created and given id of: '+element[0].id_user);
+          });
+      else
+          console.log(err);
+  })
 
+})
 
 
 
