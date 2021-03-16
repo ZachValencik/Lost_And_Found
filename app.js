@@ -3,9 +3,10 @@
 
 const express = require('express')
 const app = express()
+
+
+
 const bodyParser = require('body-parser')
-const port = 5000
-const mysql = require('mysql')
 const { json } = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -13,7 +14,10 @@ app.use(bodyParser.json())
 
 //this will be lashes db soon
 //also put the info in a .env file for security reasons
+
+const mysql = require('mysql')
 require('dotenv/config')
+
 let mysqlConnection = mysql.createConnection({
   host: process.env.host,
   user: process.env.user,
@@ -21,7 +25,6 @@ let mysqlConnection = mysql.createConnection({
   database: process.env.database,
   multipleStatements: true
 })
-
 
 mysqlConnection.connect((err)=>{
   if(!err)
@@ -32,6 +35,7 @@ mysqlConnection.connect((err)=>{
 
 
 
+const port = 5000
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
@@ -45,6 +49,35 @@ app.get('/', (req, res) => {
    
 
 })
+
+//USERS
+app.get('/user', (req, res) => {
+  mysqlConnection.query('Select * from user',(err,rows,fields)=>{
+
+    if(!err)
+    res.send(rows)
+    else
+    console.log(err);
+    
+  })
+
+})
+
+
+app.get('/user/:id_user', (req, res) => {
+  mysqlConnection.query('Select * from user where id_user = ?',[req.params.id_user],(err,row,fields)=>{
+
+    if(!err)
+    res.send(row)
+   // console.log(rows[0].floors)
+    else
+    console.log(err);
+    
+  })
+})
+
+
+
 
 
 //GET A LOCATION
