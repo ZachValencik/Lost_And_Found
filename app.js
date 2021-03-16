@@ -38,6 +38,13 @@ app.listen(port, () => {
 
 
 
+app.get('/', (req, res) => {
+
+    
+    res.send('home')
+   
+
+})
 
 
 //GET A LOCATION
