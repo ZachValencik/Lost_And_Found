@@ -92,8 +92,10 @@ app.post('/user', (req, res) => {
 
 })
 
+//END USERS
 
 
+//START OF LOCATION
 //GET A LOCATION
 app.get('/location', (req, res) => {
   mysqlConnection.query('Select * from buildings',(err,rows,fields)=>{
@@ -168,4 +170,20 @@ app.delete('/location/:location_name', (req, res) => {
   })
 })
 
+//END LOCATION
 
+
+//start of ITEMS.
+
+app.get('/items', (req, res) => {
+  mysqlConnection.query('Select * from item',(err,rows,fields)=>{
+
+    if(!err)
+    res.send(rows)
+   // console.log(rows[0].floors)
+    else
+    console.log(err);
+    
+  })
+
+})
