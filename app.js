@@ -187,3 +187,16 @@ app.get('/items', (req, res) => {
   })
 
 })
+
+app.get('/items/:category', (req, res) => {
+  mysqlConnection.query('Select * from item where category = ? ',[req.params.category],(err,rows,fields)=>{
+
+    if(!err)
+    res.send(rows)
+   // console.log(rows[0].floors)
+    else
+    console.log(err);
+    
+  })
+
+})
