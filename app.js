@@ -51,20 +51,27 @@ app.get('/', (req, res) => {
 })
 
 //USERS
-app.get('/user', (req, res) => {
+app.get('/users', (req, res) => {
   mysqlConnection.query('Select * from user',(err,rows,fields)=>{
 
-    if(!err)
-    res.send(rows)
+    if(!err){
+    const limit = req.query.limit
+    if(limit!=null){
+    const resultUsers = rows.slice(0,limit)
+    res.send(resultUsers)
+    }else
+        res.send(rows)
+    }
     else
     console.log(err);
     
   })
 
+
 })
 
 
-app.get('/user/:id_user', (req, res) => {
+app.get('/users/:id_user', (req, res) => {
   mysqlConnection.query('Select * from user where id_user = ?',[req.params.id_user],(err,row,fields)=>{
 
     if(!err)
@@ -76,7 +83,7 @@ app.get('/user/:id_user', (req, res) => {
   })
 })
 
-app.post('/user', (req, res) => {
+app.post('/users', (req, res) => {
   let emp = req.body;
   var sql = "SET @id_user = ?;SET @user_name = ?;SET @password = ?; \
   CALL UserAdd(@id_user,@user_name,@password);";
@@ -97,7 +104,7 @@ app.post('/user', (req, res) => {
 
 //START OF LOCATION
 //GET A LOCATION
-app.get('/location', (req, res) => {
+app.get('/locations', (req, res) => {
   mysqlConnection.query('Select * from buildings',(err,rows,fields)=>{
 
     if(!err)
@@ -110,7 +117,7 @@ app.get('/location', (req, res) => {
 
 })
 
-app.get('/location/:location_name', (req, res) => {
+app.get('/locations/:location_name', (req, res) => {
   mysqlConnection.query('Select * from buildings where location_name = ?',[req.params.location_name],(err,row,fields)=>{
 
     if(!err)
@@ -124,7 +131,7 @@ app.get('/location/:location_name', (req, res) => {
 
 
 //POST AN LOCATION
-app.post('/location', (req, res) => {
+app.post('/locations', (req, res) => {
   let emp = req.body;
   var sql = "SET @location_name = ?;SET @floor_num = ?;SET @room_num = ?; SET @hasBasement = ?; \
   CALL LocationAdd(@location_name,@floor_num,@room_num,@hasBasement);";
@@ -141,7 +148,7 @@ app.post('/location', (req, res) => {
 })
 
 //Put Location
-app.put('/location', (req, res) => {
+app.put('/locations', (req, res) => {
   let emp = req.body;
   var sql = "SET @location_name = ?;SET @floor_num = ?;SET @room_num = ?; SET @hasBasement = ?; \
   CALL LocationEdit(@location_name,@floor_num,@room_num,@hasBasement);";
@@ -158,7 +165,7 @@ app.put('/location', (req, res) => {
 
 
 //DELETE LOCATION
-app.delete('/location/:location_name', (req, res) => {
+app.delete('/locations/:location_name', (req, res) => {
   mysqlConnection.query(' Delete from buildings where location_name = ?',[req.params.location_name],(err,row,fields)=>{
 
     if(!err)
@@ -176,13 +183,20 @@ app.delete('/location/:location_name', (req, res) => {
 //start of ITEMS.
 
 app.get('/items', (req, res) => {
+
+  
   mysqlConnection.query('Select * from item',(err,rows,fields)=>{
 
-    if(!err)
-    res.send(rows)
-   // console.log(rows[0].floors)
-    else
-    console.log(err);
+    if(!err){
+      const limit = req.query.limit
+      if(limit!=null){
+      const resultUsers = rows.slice(0,limit)
+      res.send(resultUsers)
+      }else
+          res.send(rows)
+      }
+      else
+      console.log(err);
     
   })
 
