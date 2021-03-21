@@ -167,12 +167,23 @@ app.put('/locations', (req, res) => {
 //DELETE LOCATION
 app.delete('/locations/:location_name', (req, res) => {
   mysqlConnection.query(' Delete from buildings where location_name = ?',[req.params.location_name],(err,row,fields)=>{
+    console.log(row.affectedRows+" Changed Rows")
 
-    if(!err)
-    res.send('Deleted location')
-   // console.log(rows[0].floors)
-    else
-    console.log(err);
+    if(row.affectedRows!=0){
+      res.send(`Deleted ${req.params.location_name}`)
+      
+    }
+    else{
+      let errorMessage = {
+        status:400,
+        message: `Cannot delete ${req.params.location_name} since it doesnt exist in database` 
+      }
+      res.status(400)
+      res.send(errorMessage)
+      
+
+    }
+    
     
   })
 })
