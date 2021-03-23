@@ -3,14 +3,19 @@
 
 const express = require('express')
 const app = express()
-
-
-
 const bodyParser = require('body-parser')
 const { json } = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+app.use(express.static('public'))
+app.use('/css',express.static(__dirname +'public/css'))
+app.use('/js',express.static(__dirname+'public/js'))
+app.use('/img',express.static(__dirname+'public/img'))
+
+//set views
+app.set('views','./views')
+app.set('view engine','ejs')
 
 //this will be lashes db soon
 //also put the info in a .env file for security reasons
@@ -44,9 +49,15 @@ app.listen(port, () => {
 
 app.get('/', (req, res) => {
 
-    
-    res.send('home')
+    res.render('index',{text: 'TEST'})
    
+
+})
+
+app.get('/reportItem', (req, res) => {
+
+  res.render('report_item',{text: 'TEST'})
+ 
 
 })
 
@@ -167,8 +178,7 @@ app.put('/locations', (req, res) => {
 //DELETE LOCATION
 app.delete('/locations/:location_name', (req, res) => {
   mysqlConnection.query(' Delete from buildings where location_name = ?',[req.params.location_name],(err,row,fields)=>{
-    console.log(row.affectedRows+" Changed Rows")
-
+    
     if(row.affectedRows!=0){
       res.send(`Deleted ${req.params.location_name}`)
       
