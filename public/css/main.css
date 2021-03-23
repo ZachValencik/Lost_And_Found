@@ -1,1 +1,6 @@
 body {background-color: ghostwhite;}
+
+#AUMap img {
+    width: 75%;
+    height: 75%;
+}
