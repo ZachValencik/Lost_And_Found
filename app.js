@@ -49,14 +49,14 @@ app.listen(port, () => {
 
 app.get('/', (req, res) => {
 
-    res.render('index',{text: 'TEST'})
+    res.sendFile(__dirname+'/views/index.html')
    
 
 })
 
 app.get('/reportItem', (req, res) => {
 
-  res.render('report_item',{text: 'TEST'})
+  res.sendFile(__dirname+'/views/reportItem.html')
  
 
 })
