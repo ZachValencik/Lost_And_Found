@@ -54,12 +54,29 @@ app.get('/', (req, res) => {
 
 })
 
+app.get('/login', (req, res) => {
+
+  res.sendFile(__dirname+'/views/login.html')
+ 
+
+})
+
+
+app.post('/login', (req, res) => {
+  console.log("Loged in..")
+  res.sendFile(__dirname+'/views/login.html')
+
+})
+
+
+
 app.get('/reportItem', (req, res) => {
 
   res.sendFile(__dirname+'/views/reportItem.html')
  
 
 })
+
 
 //USERS
 app.get('/users', (req, res) => {
@@ -267,3 +284,4 @@ app.get('/items/:category', (req, res) => {
   })
 
 })
+
