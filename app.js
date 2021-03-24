@@ -204,8 +204,25 @@ app.delete('/locations/:location_name', (req, res) => {
 //start of ITEMS.
 
 app.get('/items', (req, res) => {
+  const item = req.query.item
+  if(item!=null){
+    mysqlConnection.query('Select * from item where item = ?',item,(err,rows,fields)=>{
 
-  
+      if(!err){
+        const limit = req.query.limit
+        if(limit!=null){
+        const resultUsers = rows.slice(0,limit)
+        res.send(resultUsers)
+        }else
+            res.send(rows)
+        }
+        else
+        console.log(err);
+      
+    })
+    
+
+  }else{
   mysqlConnection.query('Select * from item',(err,rows,fields)=>{
 
     if(!err){
@@ -220,7 +237,7 @@ app.get('/items', (req, res) => {
       console.log(err);
     
   })
-
+}
 })
 
 app.get('/items/:category', (req, res) => {
