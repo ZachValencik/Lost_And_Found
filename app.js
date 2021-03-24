@@ -116,6 +116,21 @@ app.post('/users', (req, res) => {
 //START OF LOCATION
 //GET A LOCATION
 app.get('/locations', (req, res) => {
+  const buildings = req.query.location_name
+
+  if(buildings!=null){
+    mysqlConnection.query('Select * from buildings where location_name = ?',buildings,(err,rows,fields)=>{
+
+      if(!err)
+      res.send(rows)
+     // console.log(rows[0].floors)
+      else
+      console.log(err);
+      
+    })
+
+  }else{
+
   mysqlConnection.query('Select * from buildings',(err,rows,fields)=>{
 
     if(!err)
@@ -125,7 +140,7 @@ app.get('/locations', (req, res) => {
     console.log(err);
     
   })
-
+}
 })
 
 app.get('/locations/:location_name', (req, res) => {
