@@ -1,21 +1,21 @@
 //https://www.youtube.com/watch?v=4fWWn2Pe2Mk
 //https://aurora.edu/about/maps-directions/
-
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const { json } = require('body-parser')
+app.use(express.urlencoded({extended:false}))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use(express.static('public'))
+
 app.use('/css',express.static(__dirname +'public/css'))
 app.use('/js',express.static(__dirname+'public/js'))
 app.use('/img',express.static(__dirname+'public/img'))
 
 //set views
 app.set('views','./views')
-app.set('view engine','ejs')
 
 //this will be lashes db soon
 //also put the info in a .env file for security reasons
@@ -62,10 +62,26 @@ app.get('/login', (req, res) => {
 })
 
 
-app.post('/login', (req, res) => {
-  console.log("Loged in..")
-  res.sendFile(__dirname+'/views/login.html')
+app.post('/login', (req, res) => { 
+  let email = req.body.email
+  let password = req.body.password
+  mysqlConnection.query('Select password from user where user_name =? ',email,(err,rows,fields)=>{
 
+  console.log(`Trying to Log In as ${email}`)
+  
+  if(password==rows[0].password){
+  console.log("Logged IN!")
+  res.sendFile(__dirname+'/views/index.html')
+  }else{
+    console.log("Wrong Password")
+    res.sendFile(__dirname+'/views/login.html')
+  }
+
+  })
+  
+  
+  
+  
 })
 
 
