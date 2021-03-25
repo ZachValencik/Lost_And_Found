@@ -124,7 +124,7 @@ app.get('/users/:id_user', (req, res) => {
     
   })
 })
-
+/*
 app.post('/users', (req, res) => {
   let emp = req.body;
   var sql = "SET @id_user = ?;SET @user_name = ?;SET @password = ?; \
@@ -140,7 +140,7 @@ app.post('/users', (req, res) => {
   })
 
 })
-
+*/
 //END USERS
 
 
@@ -310,3 +310,18 @@ app.get('/items/:category', (req, res) => {
 
 })
 
+app.post('/items', (req, res) => {
+
+  let emp = req.body;
+
+  mysqlConnection.query('insert into item (item_name,item_category,item_desc,item_location,item_room,found_by,date_found) Values (?,?,?,?,?,?,?)',[emp.item_name,emp.item_category,emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.date_found],(err,row,fields)=>{
+
+    if(!err)
+    res.send(row)
+   // console.log(rows[0].floors)
+    else
+    console.log(err);
+    
+  })
+
+})
