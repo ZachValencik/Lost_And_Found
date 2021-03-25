@@ -2,6 +2,7 @@
 //https://aurora.edu/about/maps-directions/
 const express = require('express')
 const app = express()
+
 const bodyParser = require('body-parser')
 const { json } = require('body-parser')
 app.use(express.urlencoded({extended:false}))
@@ -9,14 +10,15 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use(express.static('public'))
-
 app.use('/css',express.static(__dirname +'public/css'))
 app.use('/js',express.static(__dirname+'public/js'))
 app.use('/img',express.static(__dirname+'public/img'))
 
+
+
 //set views
 app.set('views','./views')
-
+app.set('view engine','hbs')
 //this will be lashes db soon
 //also put the info in a .env file for security reasons
 
@@ -49,38 +51,34 @@ app.listen(port, () => {
 
 app.get('/', (req, res) => {
 
-    res.sendFile(__dirname+'/views/index.html')
-   
+    res.render(__dirname+'/views/index.hbs')
 
 })
 
 app.get('/login', (req, res) => {
 
-  res.sendFile(__dirname+'/views/login.html')
+  res.render(__dirname+'/views/login.hbs')
  
 
 })
 
 
 app.post('/login', (req, res) => { 
-  let email = req.body.email
-  let password = req.body.password
+  let email = req.body.email;
+  let password = req.body.password;
   mysqlConnection.query('Select password from user where user_name =? ',email,(err,rows,fields)=>{
 
-  console.log(`Trying to Log In as ${email}`)
+  console.log(`Trying to Log In as ${email}`);
   
   if(password==rows[0].password){
   console.log("Logged IN!")
-  res.sendFile(__dirname+'/views/index.html')
+  res.render(__dirname+'/views/index.hbs')
   }else{
     console.log("Wrong Password")
-    res.sendFile(__dirname+'/views/login.html')
+    res.render(__dirname+'/views/login.hbs')
   }
 
-  })
-  
-  
-  
+  });
   
 })
 
@@ -88,7 +86,7 @@ app.post('/login', (req, res) => {
 
 app.get('/reportItem', (req, res) => {
 
-  res.sendFile(__dirname+'/views/reportItem.html')
+  res.render(__dirname+'/views/reportItem.hbs')
  
 
 })

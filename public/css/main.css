@@ -1,6 +1,20 @@
-body {background-color: cyan;}
+body {background-color: ghostwhite;}
 
 #AUMap img {
     width: 75%;
     height: 75%;
+}
+
+
+nav{
+    background-color: rgb(36, 62, 138);
+    color: white;
+    padding: 5px 15px;
+    display:flex;
+    justify-content: space-between;
+}
+
+nav img {
+    width: 5%;
+    height: 5%;
 }
