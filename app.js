@@ -310,18 +310,3 @@ app.get('/items/:category', (req, res) => {
 
 })
 
-app.post('/items', (req, res) => {
- 
-  let emp = req.body;
-
-  mysqlConnection.query('insert into items (location_name,floor_num,room_num,hasBasement) Values (?,?,?,?)',[emp.location_name,emp.floor_num,emp.room_num,emp.hasBasement],(err,row,fields)=>{
-
-    if(!err)
-    res.send(row)
-   // console.log(rows[0].floors)
-    else
-    console.log(err);
-    
-  })
-
-})
