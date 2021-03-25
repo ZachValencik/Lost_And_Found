@@ -189,7 +189,7 @@ app.get('/locations/:location_name', (req, res) => {
 
 //POST AN LOCATION
 app.post('/locations', (req, res) => {
-  let emp = req.body;
+  /*let emp = req.body;
   var sql = "SET @location_name = ?;SET @floor_num = ?;SET @room_num = ?; SET @hasBasement = ?; \
   CALL LocationAdd(@location_name,@floor_num,@room_num,@hasBasement);";
   mysqlConnection.query(sql, [emp.location_name, emp.floor_num, emp.room_num, emp.hasBasement], (err, rows, fields) => {
@@ -200,6 +200,17 @@ app.post('/locations', (req, res) => {
           });
       else
           console.log(err);
+  })*/
+  let emp = req.body;
+
+  mysqlConnection.query('insert into location (location_name,floor_num,room_num,hasBasement) Values (?,?,?,?)',[emp.location_name,emp.floor_num,emp.room_num,emp.hasBasement],(err,row,fields)=>{
+
+    if(!err)
+    res.send(row)
+   // console.log(rows[0].floors)
+    else
+    console.log(err);
+    
   })
 
 })
@@ -299,3 +310,18 @@ app.get('/items/:category', (req, res) => {
 
 })
 
+app.post('/items', (req, res) => {
+ 
+  let emp = req.body;
+
+  mysqlConnection.query('insert into items (location_name,floor_num,room_num,hasBasement) Values (?,?,?,?)',[emp.location_name,emp.floor_num,emp.room_num,emp.hasBasement],(err,row,fields)=>{
+
+    if(!err)
+    res.send(row)
+   // console.log(rows[0].floors)
+    else
+    console.log(err);
+    
+  })
+
+})
