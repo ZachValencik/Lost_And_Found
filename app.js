@@ -66,7 +66,7 @@ app.get('/login', (req, res) => {
 app.post('/login', (req, res) => { 
   let email = req.body.email;
   let password = req.body.password;
-  mysqlConnection.query('Select password from user where user_name =? ',email,(err,rows,fields)=>{
+  mysqlConnection.query('Select password from user where email =? ',email,(err,rows,fields)=>{
 
   console.log(`Trying to Log In as ${email}`);
   
@@ -147,10 +147,10 @@ app.post('/users', (req, res) => {
 //START OF LOCATION
 //GET A LOCATION
 app.get('/locations', (req, res) => {
-  const buildings = req.query.location_name
+  const location = req.query.location_name
 
-  if(buildings!=null){
-    mysqlConnection.query('Select * from buildings where location_name = ?',buildings,(err,rows,fields)=>{
+  if(location!=null){
+    mysqlConnection.query('Select * from location where location_name = ?',location,(err,rows,fields)=>{
 
       if(!err)
       res.send(rows)
@@ -162,7 +162,7 @@ app.get('/locations', (req, res) => {
 
   }else{
 
-  mysqlConnection.query('Select * from buildings',(err,rows,fields)=>{
+  mysqlConnection.query('Select * from location',(err,rows,fields)=>{
 
     if(!err)
     res.send(rows)
@@ -175,7 +175,7 @@ app.get('/locations', (req, res) => {
 })
 
 app.get('/locations/:location_name', (req, res) => {
-  mysqlConnection.query('Select * from buildings where location_name = ?',[req.params.location_name],(err,row,fields)=>{
+  mysqlConnection.query('Select * from location where location_name = ?',[req.params.location_name],(err,row,fields)=>{
 
     if(!err)
     res.send(row)
@@ -223,7 +223,7 @@ app.put('/locations', (req, res) => {
 
 //DELETE LOCATION
 app.delete('/locations/:location_name', (req, res) => {
-  mysqlConnection.query(' Delete from buildings where location_name = ?',[req.params.location_name],(err,row,fields)=>{
+  mysqlConnection.query(' Delete from location where location_name = ?',[req.params.location_name],(err,row,fields)=>{
     
     if(row.affectedRows!=0){
       res.send(`Deleted ${req.params.location_name}`)
