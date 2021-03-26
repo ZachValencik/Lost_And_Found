@@ -310,6 +310,9 @@ app.get('/items/:category', (req, res) => {
 
 })
 
+
+
+
 app.post('/items', (req, res) => {
 
   let emp = req.body;
@@ -325,6 +328,35 @@ app.post('/items', (req, res) => {
   })
 
 })
+
+
+
+
+app.put('/items/:item_id', (req, res) => {
+  let emp = req.body
+  let query = 'update item set item_name = ?, item_category = ?, item_desc = ?, item_location = ?,\
+   item_room = ?, found_by = ?, found_by_desc = ?, date_found = ?, claimed_by =?, claimed_desc = ? where item_id = ?'
+  mysqlConnection.query(query,[emp.item_name,emp.item_category,emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.found_by_desc,emp.date_found,emp.claimed_by,emp.claimed_desc,req.params.item_id],(err,row,fields)=>{
+    
+    if(row.affectedRows!=0){
+      res.send(`Updated ${req.params.item_id}`)
+      
+    }
+    else{
+      let errorMessage = {
+        status:400,
+        message: `Cannot update ${req.params.item_id} since it doesnt exist in database` 
+      }
+      res.status(400)
+      res.send(errorMessage)
+      
+
+    }
+    
+    
+  })
+})
+
 
 //DELETE item
 app.delete('/items/:item_id', (req, res) => {
