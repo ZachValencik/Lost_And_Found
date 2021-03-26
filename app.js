@@ -5,10 +5,12 @@ const app = express()
 
 const bodyParser = require('body-parser')
 const { json } = require('body-parser')
+const cookieParser = require('cookie-parser')
 app.use(express.urlencoded({extended:false}))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(bodyParser.json())
+app.use(cookieParser())
 
 app.use(express.static('public'))
 

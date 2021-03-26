@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const mysql = require('mysql')
+const jwt = require('jsonwebtoken')
 require('dotenv/config')
 let mysqlConnection = mysql.createConnection({
     host: process.env.host,
@@ -18,6 +19,10 @@ let mysqlConnection = mysql.createConnection({
   })
 
 router.get('/',(req,res)=>{
+
+    console.log(req.cookies.jwt)
+    
+    res.clearCookie('jwt')
     res.render('index');
 })
 
@@ -30,10 +35,10 @@ router.get('/login', (req, res) => {
 })
 
 
-router.post('/login', (req, res) => { 
+router.post('/login', async (req, res) => { 
   let email = req.body.email;
   let password = req.body.password;
-  mysqlConnection.query('Select password from user where email =? ',email,(err,rows,fields)=>{
+  mysqlConnection.query('Select password from user where email =? ',email, async (err,rows,fields)=>{
 
   console.log(`Trying to Log In as ${email}`);
   if(err){
@@ -48,8 +53,22 @@ router.post('/login', (req, res) => {
         message:'Wrong Email or Password!'
     })
   }
-  else if(password==rows[0].password){
+  
+  else if(password== await rows[0].password){//THIS LOGS YOU IN
   console.log("Logged IN!")
+  const id = email;
+  
+  const token = jwt.sign({id},process.env.JWT_SECRET,{
+    expiresIn: process.env.JWT_EXPIRES_IN
+  })
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 *1000
+    ),
+    httpOnly:true
+  }
+  res.cookie('jwt',token,cookieOptions)
+
   return res.render('index',{
     message:`Logged in as ${email}`
 })
@@ -62,7 +81,6 @@ router.post('/login', (req, res) => {
 });
   
 })
-
 
 
 router.get('/reportItem', (req, res) => {
