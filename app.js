@@ -325,3 +325,26 @@ app.post('/items', (req, res) => {
   })
 
 })
+
+//DELETE item
+app.delete('/items/:item_id', (req, res) => {
+  mysqlConnection.query('Delete from item where item_id = ?',[req.params.item_id],(err,row,fields)=>{
+    
+    if(row.affectedRows!=0){
+      res.send(`Deleted ${req.params.item_id}`)
+      
+    }
+    else{
+      let errorMessage = {
+        status:400,
+        message: `Cannot delete ${req.params.item_id} since it doesnt exist in database` 
+      }
+      res.status(400)
+      res.send(errorMessage)
+      
+
+    }
+    
+    
+  })
+})
