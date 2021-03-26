@@ -37,19 +37,29 @@ router.post('/login', (req, res) => {
 
   console.log(`Trying to Log In as ${email}`);
   if(err){
-    console.log("Wrong Email or Password")
-    res.render('login.hbs')
+    //console.log("Wrong Email or Password")
+    return res.render('login',{
+        message:'Wrong Email or Password!'
+    })
   }
   else if(rows.length==0) {
     console.log("Wrong Email or Password")
-    res.render('login.hbs')
+    return res.render('login',{
+        message:'Wrong Email or Password!'
+    })
   }
   else if(password==rows[0].password){
   console.log("Logged IN!")
-  res.render('index.hbs')
+  return res.render('index',{
+    message:`Logged in as ${email}`
+})
+  }else{
+    return res.render('login',{
+        message:`Wrong Email or Password!`
+    })
   }
 
-  });
+});
   
 })
 
