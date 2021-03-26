@@ -36,13 +36,17 @@ router.post('/login', (req, res) => {
   mysqlConnection.query('Select password from user where email =? ',email,(err,rows,fields)=>{
 
   console.log(`Trying to Log In as ${email}`);
-  
-  if(password==rows[0].password){
+  if(err){
+    console.log("Wrong Email or Password")
+    res.render('login.hbs')
+  }
+  else if(rows.length==0) {
+    console.log("Wrong Email or Password")
+    res.render('login.hbs')
+  }
+  else if(password==rows[0].password){
   console.log("Logged IN!")
   res.render('index.hbs')
-  }else{
-    console.log("Wrong Password")
-    res.render('login.hbs')
   }
 
   });
