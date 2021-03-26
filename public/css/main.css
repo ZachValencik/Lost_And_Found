@@ -14,6 +14,23 @@ nav{
     justify-content: space-between;
 }
 
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav li {
+    list-style: none;
+}
+
+nav li a {
+    color:ghostwhite;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 6px 9px;
+}
+
 nav img {
     width: 5%;
     height: 5%;
