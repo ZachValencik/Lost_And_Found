@@ -1,8 +1,11 @@
 const express = require('express')
 const router = express.Router();
 const mysql = require('mysql')
-const jwt = require('jsonwebtoken')
 require('dotenv/config')
+
+
+
+
 let mysqlConnection = mysql.createConnection({
     host: process.env.host,
     user: process.env.user,
@@ -41,6 +44,7 @@ router.post('/login', async (req, res) => {
   if(err){
     //console.log("Wrong Email or Password")
     return res.render('login',{
+
         message:'Wrong Email or Password!'
     })
   }
@@ -53,19 +57,6 @@ router.post('/login', async (req, res) => {
   
   else if(password== await rows[0].password){//THIS LOGS YOU IN
   console.log("Logged IN!")
-  const id = email;
-  
-  const token = jwt.sign({id},process.env.JWT_SECRET,{
-    expiresIn: process.env.JWT_EXPIRES_IN
-  })
-  const cookieOptions = {
-    expires: new Date(
-      Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 *1000
-    ),
-    httpOnly:true
-  }
-  res.cookie('jwt',token,cookieOptions)
-
   return res.render('index',{
     message:`Logged in as ${email}`
 })

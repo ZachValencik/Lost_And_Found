@@ -5,19 +5,12 @@ const app = express()
 
 const bodyParser = require('body-parser')
 const { json } = require('body-parser')
-const cookieParser = require('cookie-parser')
-let session = require('express-session')
 app.use(express.urlencoded({extended:false}))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(bodyParser.json())
-app.use(cookieParser())
-
 app.use(express.static('public'))
 
-//app.use('/css',express.static(__dirname +'public/css'))
-//app.use('/js',express.static(__dirname+'public/js'))
-//app.use('/img',express.static(__dirname+'public/img'))
 
 
 //set views
