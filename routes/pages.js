@@ -22,7 +22,7 @@ let mysqlConnection = mysql.createConnection({
   })
 
 router.get('/',(req,res)=>{
-    console.log(req.cookies.jwt)
+    
     res.render('index');
 })
 
