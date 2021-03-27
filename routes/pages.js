@@ -33,8 +33,15 @@ router.get('/',(req,res)=>{
 
 
 router.get('/login', (req, res) => {
+  if(!req.session.email)
+    res.render('login')
+  else{
+    return res.redirect('index',{
+      logedIn:`Logged in as ${req.session.email}`
+  })
 
-  res.render('login')
+  }
+   
  
 
 })
@@ -63,9 +70,7 @@ router.post('/login', async (req, res) => {
   else if(password== await rows[0].password){//THIS LOGS YOU IN
   console.log("Logged IN!")
   req.session.email = email;
-  return res.render('index',{
-    logedIn:`Logged in as ${req.session.email}`
-})
+  res.redirect('/')
   }else{
     return res.render('login',{
         message:`Wrong Email or Password!`
@@ -91,10 +96,10 @@ router.get('/logout', (req, res) => {
 })
 
 router.get('/reportItem', (req, res) => {
-  if(req.session.email!=null)
+  if(req.session.email)
     res.render('reportItem')
   else
-    res.render('login')
+    res.redirect('/login')
  
 
 })
