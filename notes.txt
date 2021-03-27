@@ -1,5 +1,11 @@
 https://www.youtube.com/watch?v=A01KtJTv1oc&ab_channel=RaddyTheBrand EJS TUT
 
-// Login Tut https://www.youtube.com/watch?v=-RCnNyD0L-s&ab_channel=WebDevSimplified
+// Login Tut https://www.youtube.com/watch?v=sTHWNPVNvm8&ab_channel=PedroTech
 
+
+maybe will help with testing later 
 //https://stackoverflow.com/questions/35697763/post-request-via-chai
+
+
+//Handle bars if, and loop statements
+https://handlebarsjs.com/guide/builtin-helpers.html#if
