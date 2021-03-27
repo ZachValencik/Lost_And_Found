@@ -5,7 +5,6 @@ require('dotenv/config')
 
 
 
-
 let mysqlConnection = mysql.createConnection({
     host: process.env.host,
     user: process.env.user,
@@ -22,8 +21,14 @@ let mysqlConnection = mysql.createConnection({
   })
 
 router.get('/',(req,res)=>{
-    
-    res.render('index');
+    if(req.session.email==null)
+      res.render('index');
+    else{
+      return res.render('index',{
+        logedIn:`Logged in as ${req.session.email}`
+    })
+
+    }
 })
 
 
@@ -57,8 +62,9 @@ router.post('/login', async (req, res) => {
   
   else if(password== await rows[0].password){//THIS LOGS YOU IN
   console.log("Logged IN!")
+  req.session.email = email;
   return res.render('index',{
-    message:`Logged in as ${email}`
+    logedIn:`Logged in as ${req.session.email}`
 })
   }else{
     return res.render('login',{
@@ -72,8 +78,10 @@ router.post('/login', async (req, res) => {
 
 
 router.get('/reportItem', (req, res) => {
-
-  res.render('reportItem')
+  if(req.session.email!=null)
+    res.render('reportItem')
+  else
+    res.render('login')
  
 
 })

@@ -12,6 +12,21 @@ app.use(bodyParser.json())
 app.use(express.static('public'))
 
 
+//for Staying logged in 
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
+app.use(cookieParser())
+require('dotenv/config')
+app.use(session({
+  key:"email",
+  secret: process.env.SECRET,
+  resave:false,
+  saveUninitialized:false,
+  cookie:{
+    expires:60*60*24
+
+  }
+}))
 
 //set views
 app.set('views','./views')

@@ -17,12 +17,16 @@
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/reportItem">Report A Lost Item</a></li>
+            {{#if logedIn}}
+            <li><a href="/logout">Logout</a></li> 
+            {{else}}
             <li><a href="/login">Login</a></li>
+            {{/if}}  
         </ul>
     </nav>
 
-    {{#if message}}
-<h4 class="alert alert-success mt-4">{{message}}</h4>
+    {{#if logedIn}}
+<h4 class="alert alert-success mt-4">{{logedIn}}</h4>
 {{/if}}
   
     
