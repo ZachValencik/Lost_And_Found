@@ -77,6 +77,19 @@ router.post('/login', async (req, res) => {
 })
 
 
+router.get('/logout', (req, res) => {
+
+      if(!req.session.email){
+        res.render('index')
+      }else{
+        req.session.destroy()
+        return res.render('index',{
+         logedIn:false 
+      })
+
+      }
+})
+
 router.get('/reportItem', (req, res) => {
   if(req.session.email!=null)
     res.render('reportItem')
