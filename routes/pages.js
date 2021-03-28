@@ -100,6 +100,14 @@ router.get('/lostItems', (req, res) => {
 })
 
 
+
+router.get('/admin', (req, res) => {
+  //TODO: make sure only admins can access it.
+  //Should make the session know its an admin so we can display admin only links
+  res.render('admin');
+})
+
+
 //USERS
 router.get('/users', (req, res) => {
   mysqlConnection.query('Select * from user',(err,rows,fields)=>{
