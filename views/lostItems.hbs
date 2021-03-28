@@ -20,8 +20,11 @@
         <img src="img/AULogo.png">
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/reportItem">Report A Lost Item</a></li>
+            {{#if logedIn}}
+            <li><a href="/logout">Logout</a></li> 
+            {{else}}
             <li><a href="/login">Login</a></li>
+            {{/if}} 
         </ul>
     </nav>
 

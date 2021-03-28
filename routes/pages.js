@@ -36,9 +36,7 @@ router.get('/login', (req, res) => {
   if(!req.session.email)
     res.render('login')
   else{
-    return res.redirect('index',{
-      logedIn:`Logged in as ${req.session.email}`
-  })
+    res.redirect('/')
 
   }
    
@@ -84,24 +82,21 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
 
-      if(!req.session.email){
-        res.render('index')
-      }else{
+      if(req.session.email)
         req.session.destroy()
-        return res.render('index',{
-         logedIn:false 
-      })
-
-      }
+        
+    res.redirect('/')
 })
 
-router.get('/reportItem', (req, res) => {
-  if(req.session.email)
-    res.render('reportItem')
+router.get('/lostItems', (req, res) => {
+  if(req.session.email){
+    return res.render('lostItems',{
+      logedIn:true
+  })
+  }
+    
   else
     res.redirect('/login')
- 
-
 })
 
 
