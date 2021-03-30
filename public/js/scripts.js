@@ -11,9 +11,9 @@ $(document).ready(function(){
         async: true,
         crossDomain : true,
         success : function( data ){
-            let oStr = `<h2> Available Tasks </h2>`;
+            let oStr = `<h2> Lost Items</h2>`;
             oStr += "<table border='1'> ";
-            oStr += `<tr><th>Id</th><th>Task</th><th>Status</th><th>Created</th></tr>`;
+            oStr += `<tr><th>ID</th><th>Item</th><th>Description</th><th>Lost Location</th></tr>`;
             alert("success");
             console.log(`data:`);
             console.log( data );
