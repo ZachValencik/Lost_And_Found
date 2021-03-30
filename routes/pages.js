@@ -37,14 +37,10 @@ router.get('/login', (req, res) => {
     res.render('login')
   else{
     res.redirect('/')
-
   }
-   
- 
-
 })
 
-
+//This logs the user in
 router.post('/login', async (req, res) => { 
   let email = req.body.email;
   let password = req.body.password;

@@ -2,7 +2,8 @@
 //https://aurora.edu/about/maps-directions/
 const express = require('express')
 const app = express()
-
+let cors = require('cors')
+app.use(cors())
 const bodyParser = require('body-parser')
 const { json } = require('body-parser')
 app.use(express.urlencoded({extended:false}))
