@@ -127,10 +127,11 @@ $(document).ready(function(){
             let oStr2 = `<h2>Items Not Claimed</h2>`;
           
             oStr += "<table border='1'> ";
-            oStr2+=oStr;
+            oStr2+="<table border='1'> ";
             oStr += `<tr><th>ID</th><th>Item</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
             <th>Claimed By</th><th>Claimed Description</th></tr>`;
-            oStr2+=oStr;
+            oStr2+=`<tr><th>ID</th><th>Item</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
+            <th>Claimed By</th><th>Claimed Description</th></tr>`;
            // alert("success");
             console.log(`data:`);
             console.log( data );
@@ -147,18 +148,25 @@ $(document).ready(function(){
                 let claimedBy = data[i].claimed_by;
                 let claimedDesc = data[i].claimed_desc;
                 if(dateSplit[1]==month){
+                  if(claimedBy!=null){
                 oStr += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
                 oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr += `</tr>`;
+                  }else {
+                oStr2 += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+                oStr2 += `</tr>`;
+                  }
                 }
 
 
             }
 
             oStr += `</table>`;
-            
+            oStr += `<br>`;
+            oStr2+=`</table>`;
             //id.innerHTML = oStr;
-            $("#test").html(oStr);
+            $("#test").html(oStr+oStr2);
         },
         error : function( xhr, status, error ) {
             alert("Error");
