@@ -122,7 +122,7 @@ $(document).ready(function(){
         success : function( data ){
           let month = document.getElementById("selectMonth").value;
           console.log("hello "+ month);
-            /*
+            
             let oStr = `<h2>Items Claimed</h2>`;
             let oStr2 = `<h2>Items Not Claimed</h2>`;
           
@@ -143,13 +143,10 @@ $(document).ready(function(){
                 let foundBy = data[i].found_by;
                 let foundByDesc = data[i].found_by_desc;
                 let dateFound = data[i].date_found;
+                let dateSplit = dateFound.split("-");
                 let claimedBy = data[i].claimed_by;
                 let claimedDesc = data[i].claimed_desc;
-                if(claimedBy!=null){
-                oStr2 += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
-                oStr2 += `</tr>`;
-                }else{
+                if(dateSplit[1]==month){
                 oStr += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
                 oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr += `</tr>`;
@@ -159,9 +156,9 @@ $(document).ready(function(){
             }
 
             oStr += `</table>`;
-            */
+            
             //id.innerHTML = oStr;
-            $("#test").html(month);
+            $("#test").html(oStr);
         },
         error : function( xhr, status, error ) {
             alert("Error");
