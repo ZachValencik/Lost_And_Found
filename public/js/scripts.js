@@ -2,7 +2,7 @@
 $(document).ready(function(){
 
     $("#displayAllItems").click(function(){
-      let URL = "http://127.0.0.1:5000/items"
+      let URL = "http://localhost:5000/items"
        // $("#test").html("Display DB Info Below..");
        $.ajax({
         url: URL,
@@ -55,7 +55,7 @@ $(document).ready(function(){
   $(document).ready(function(){
 
     $("#displayFoundItems").click(function(){
-      let URL = "http://127.0.0.1:5000/items"
+      let URL = "http://localhost:5000/items"
        // $("#test").html("Display DB Info Below..");
        $.ajax({
         url: URL,
@@ -106,12 +106,15 @@ $(document).ready(function(){
     );
   })  
 
+
+
+
 // The Monthy report- Sort the Items found to one table and not clamied to another
 
   $(document).ready(function(){
 
     $("#displayByMonth").click(function(){
-      let URL = "http://127.0.0.1:5000/items"
+      let URL = "http://localhost:5000/items"
        // $("#test").html("Display DB Info Below..");
        $.ajax({
         url: URL,

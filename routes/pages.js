@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router();
 const mysql = require('mysql')
+
 require('dotenv/config')
 
 
@@ -25,7 +26,8 @@ router.get('/',(req,res)=>{
       res.render('index');
     else{
       return res.render('index',{
-        logedIn:`Logged in as ${req.session.email}`
+        logedIn:`Logged in as ${req.session.email}`,
+        isOfficer:req.session.admin
     })
 
     }
@@ -44,7 +46,7 @@ router.get('/login', (req, res) => {
 router.post('/login', async (req, res) => { 
   let email = req.body.email;
   let password = req.body.password;
-  mysqlConnection.query('Select password from user where email =? ',email, async (err,rows,fields)=>{
+  mysqlConnection.query('Select password, is_admin from user where email =? ',email, async (err,rows,fields)=>{
 
   console.log(`Trying to Log In as ${email}`);
   if(err){
@@ -64,6 +66,8 @@ router.post('/login', async (req, res) => {
   else if(password== await rows[0].password){//THIS LOGS YOU IN
   console.log("Logged IN!")
   req.session.email = email;
+  req.session.admin = rows[0].is_admin;
+  console.log(rows[0].is_admin)
   res.redirect('/')
   }else{
     return res.render('login',{
@@ -100,7 +104,15 @@ router.get('/lostItems', (req, res) => {
 router.get('/admin', (req, res) => {
   //TODO: make sure only admins can access it.
   //Should make the session know its an admin so we can display admin only links
-  res.render('admin');
+  if(req.session.admin){
+    return res.render('admin',{
+      isOfficer: req.session.admin,
+      logedIn:req.session.email
+  })
+  }
+  else {
+    res.redirect('/login')
+  }
 })
 
 

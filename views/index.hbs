@@ -21,8 +21,12 @@
             {{#if logedIn}}
             <li><a href="/logout">Logout</a></li> 
             {{else}}
+            
             <li><a href="/login">Login</a></li>
-            {{/if}}  
+            {{/if}}
+            {{#if isOfficer}} 
+            <li><a href="/admin">Admin</a></li>
+            {{/if}} 
         </ul>
     </nav>
 
