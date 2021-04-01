@@ -16,9 +16,12 @@ crossorigin="anonymous"></script>
 </head>
 <body>
      <nav>
-        <img src="img/AULogo.png">
+         <a href="/"><img src="img/AULogo.png" alt="HTML tutorial" style="width:60px;height:60px;"></a>
         <ul>
             <li><a href="/">Home</a></li>
+            {{#if isOfficer}} 
+            <li><a href="/admin">Admin</a></li>
+            {{/if}} 
             {{#if logedIn}}
             <li><a href="/logout">Logout</a></li> 
             {{else}}

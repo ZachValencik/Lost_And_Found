@@ -30,7 +30,7 @@ $(document).ready(function(){
                 let claimedBy = data[i].claimed_by;
                 let claimedDesc = data[i].claimed_desc;
                 oStr += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+                //oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr += `</tr>`;
 
             }
@@ -84,7 +84,7 @@ $(document).ready(function(){
                 let claimedDesc = data[i].claimed_desc;
                 if(claimedBy!=null){
                 oStr += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+               // oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr += `</tr>`;
                 }
 
@@ -153,11 +153,11 @@ $(document).ready(function(){
                 if(dateSplit[1]==month){
                   if(claimedBy!=null){
                 oStr += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+               // oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr += `</tr>`;
                   }else {
                 oStr2 += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+               // oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr2 += `</tr>`;
                   }
                 }

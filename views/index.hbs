@@ -14,19 +14,19 @@
 <body>
     
     <nav>
-        <img src="img/AULogo.png">
+        <a href="/"><img src="img/AULogo.png" alt="HTML tutorial" style="width:50px;height:50px;"></a>
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/lostItems">Lost Items</a></li>
+            {{#if isOfficer}} 
+            <li><a href="/admin">Admin</a></li>
+            {{/if}} 
             {{#if logedIn}}
             <li><a href="/logout">Logout</a></li> 
             {{else}}
             
             <li><a href="/login">Login</a></li>
             {{/if}}
-            {{#if isOfficer}} 
-            <li><a href="/admin">Admin</a></li>
-            {{/if}} 
         </ul>
     </nav>
 

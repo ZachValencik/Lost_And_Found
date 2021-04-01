@@ -91,7 +91,8 @@ router.get('/logout', (req, res) => {
 router.get('/lostItems', (req, res) => {
   if(req.session.email){
     return res.render('lostItems',{
-      logedIn:true
+      logedIn:req.session.email,
+      isOfficer:req.session.admin
   })
   }
     
