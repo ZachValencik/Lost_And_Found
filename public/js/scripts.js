@@ -1,7 +1,8 @@
-
+//Display all by category
+/*
 $(document).ready(function(){
 
-    $("#displayAllItems").click(function(){
+    $("displayByCategory").click(function(){
       let URL = "http://localhost:5000/items"
        // $("#test").html("Display DB Info Below..");
        $.ajax({
@@ -11,6 +12,7 @@ $(document).ready(function(){
         async: true,
         crossDomain : true,
         success : function( data ){
+
             let oStr = `<h2> Lost Items</h2>`;
             oStr += "<table border='1'> ";
             oStr += `<tr><th>ID</th><th>Item</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
@@ -105,8 +107,7 @@ $(document).ready(function(){
       
     );
   })  
-
-
+*/
 
 
 // The Monthy report- Sort the Items found to one table and not clamied to another
