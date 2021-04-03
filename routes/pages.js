@@ -88,6 +88,13 @@ router.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
+
+/*
+8.	Non admin users – 
+Students should have access to a menu of item categories. For example, clothes, keys, flash drives, etc. 
+When they select a category, a report of the item, its ID (like flash drive 1) and the date recovered should be shown. 
+*/
+
 router.get('/lostItems', (req, res) => {
   if(req.session.email){
     return res.render('lostItems',{
@@ -101,6 +108,13 @@ router.get('/lostItems', (req, res) => {
 })
 
 
+
+/*
+7.	Admin user – Work in Progress
+police members should have admin access to the data that allows them to operate the application. 
+Each police officer should have their own ID.  
+Non-admin users (e.g., students or facility) can only pursue the general categories of items found and not yet claimed. 
+*/
 
 router.get('/admin', (req, res) => {
   //TODO: make sure only admins can access it.
