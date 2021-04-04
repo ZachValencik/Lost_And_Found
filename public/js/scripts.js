@@ -20,40 +20,43 @@ $(document).ready(function(){
         async: true,
         crossDomain : true,
         success : function( data ){
-
-            let oStr = `<h2> Lost Items</h2>`;
-            oStr += "<table border='1'> ";
-            oStr += `<tr><th>ID</th><th>Category</th><th>Where Found</th><th>Room #</th><th>Date Found</th></tr>`;
-            //alert("success");
-            console.log(`data:`);
-            console.log( data );
-            let categoryArray =[]; // get the category of the items so we can use it to make a table for each category.
+           let oStr;
+            const categoryArray = new Set(); // get the category of the items so we can use it to make a table for each category.
             for(let i =0; i<data.length;i++){
-              categoryArray.push(data[i].item_category);
+              if(data[i].claimed_by===null)
+                categoryArray.add(data[i].item_category);
             }
 
-            console.log(categoryArray);
+            let count =0;
+            for (const v of categoryArray) {
+              oStr += `<h2>${v}</h2>`;
+              oStr += "<table border='1'> ";
+              oStr += `<tr><th>ID</th><th>Category</th><th>Where Found</th><th>Room #</th><th>Date Found</th></tr>`;
 
-            for (let i=0; i<data.length; i++){
+              for (let i=0; i<data.length; i++){
+                
+                if(v===data[i].item_category && data[i].claimed_by===null){
+                
                 let ti = data[i].item_id;
-               // let t = data[i].item_name;
                 let cat = data[i].item_category;
-               // let s = data[i].item_desc;
                 let c = data[i].item_location;
                 let room = data[i].item_room;
-              //  let foundBy = data[i].found_by;
-              //  let foundByDesc = data[i].found_by_desc;
                 let dateFound = data[i].date_found;
-                let claimedBy = data[i].claimed_by;
-              //  let claimedDesc = data[i].claimed_desc;
-                if(claimedBy==null){
+                
                 oStr += `<tr><td>${ti}</td><td>${cat}</td><td>${c}</td><td>${room}</td><td>${dateFound}</td>`;
                 //oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr += `</tr>`;
-                }
+                
             }
-            oStr += `</table>`;
-            //id.innerHTML = oStr;
+
+          }
+          oStr += `</table>`;
+          oStr+= `<br>`;
+            }
+
+            
+            
+            
             $("#test").html(oStr);
         },
         error : function( xhr, status, error ) {
