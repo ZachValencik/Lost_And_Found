@@ -20,7 +20,7 @@ $(document).ready(function(){
         async: true,
         crossDomain : true,
         success : function( data ){
-           let oStr;
+           let oStr =``;
             const categoryArray = new Set(); // get the category of the items so we can use it to make a table for each category.
             for(let i =0; i<data.length;i++){
               if(data[i].claimed_by===null)
