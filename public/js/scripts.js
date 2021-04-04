@@ -21,6 +21,7 @@ $(document).ready(function(){
         crossDomain : true,
         success : function( data ){
            let oStr =``;
+           let oStr2 = ``;
             const categoryArray = new Set(); // get the category of the items so we can use it to make a table for each category.
             for(let i =0; i<data.length;i++){
               if(data[i].claimed_by===null)
@@ -29,27 +30,31 @@ $(document).ready(function(){
 
             let count =0;
             for (const v of categoryArray) {
-              oStr += `<h2>${v}</h2>`;
-              oStr += "<table border='1'> ";
-              oStr += `<tr><th>ID</th><th>Category</th><th>Where Found</th><th>Room #</th><th>Date Found</th></tr>`;
+             
 
               for (let i=0; i<data.length; i++){
                 
                 if(v===data[i].item_category && data[i].claimed_by===null){
-                
+                count++;
                 let ti = data[i].item_id;
                 let cat = data[i].item_category;
                 let c = data[i].item_location;
                 let room = data[i].item_room;
                 let dateFound = data[i].date_found;
                 
-                oStr += `<tr><td>${ti}</td><td>${cat}</td><td>${c}</td><td>${room}</td><td>${dateFound}</td>`;
+                oStr2 += `<tr><td>${ti}</td><td>${cat}</td><td>${c}</td><td>${room}</td><td>${dateFound}</td>`;
                 //oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
-                oStr += `</tr>`;
+                oStr2 += `</tr>`;
                 
             }
-
+           
           }
+          oStr += `<h2>${v}-Number of items-${count}</h2>`;
+          oStr += "<table border='1'> ";
+          oStr += `<tr><th>ID</th><th>Category</th><th>Where Found</th><th>Room #</th><th>Date Found</th></tr>`;
+          oStr+=oStr2;
+          oStr2=``;
+          count=0;
           oStr += `</table>`;
           oStr+= `<br>`;
             }
