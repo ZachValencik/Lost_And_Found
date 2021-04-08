@@ -85,10 +85,12 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
 
-      if(req.session.email){
+        
 
+      if(req.session.email){
         req.session.destroy()
         req.session=null;
+        
         res.redirect(200,'/')
       }else{
         res.redirect(400,'/')
