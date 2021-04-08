@@ -361,7 +361,7 @@ router.post('/items', (req, res) => {
 
     if(!err)
     res.send(row)
-   // console.log(rows[0].floors)
+   //// console.log(rows[0].floors)
     else
     console.log(err);
     
