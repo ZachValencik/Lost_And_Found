@@ -51,12 +51,14 @@ router.post('/login', async (req, res) => {
   console.log(`Trying to Log In as ${email}`);
   if(err){
     //console.log("Wrong Email or Password")
+    res.status(400);
     return res.render('login',{
 
         message:'Wrong Email or Password!'
     })
   }
   else if(rows.length==0) {
+    res.status(400);
     console.log("Wrong Email or Password")
     return res.render('login',{
         message:'Wrong Email or Password!'
@@ -68,8 +70,9 @@ router.post('/login', async (req, res) => {
   req.session.email = email;
   req.session.admin = rows[0].is_admin;
   console.log(rows[0].is_admin)
-  res.redirect('/')
+  res.redirect(200,'/')
   }else{
+    res.status(400)
     return res.render('login',{
         message:`Wrong Email or Password!`
     })
@@ -82,11 +85,25 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
 
-      if(req.session.email)
-        req.session.destroy()
         
-    res.redirect('/')
+
+      if(req.session.email){
+        req.session.destroy()
+        req.session=null;
+        
+        res.redirect(200,'/')
+      }else{
+        res.redirect(400,'/')
+      }
+    
 })
+
+
+/*
+8.	Non admin users – 
+Students should have access to a menu of item categories. For example, clothes, keys, flash drives, etc. 
+When they select a category, a report of the item, its ID (like flash drive 1) and the date recovered should be shown. 
+*/
 
 router.get('/lostItems', (req, res) => {
   if(req.session.email){
@@ -101,6 +118,13 @@ router.get('/lostItems', (req, res) => {
 })
 
 
+
+/*
+7.	Admin user – Work in Progress
+police members should have admin access to the data that allows them to operate the application. 
+Each police officer should have their own ID.  
+Non-admin users (e.g., students or facility) can only pursue the general categories of items found and not yet claimed. 
+*/
 
 router.get('/admin', (req, res) => {
   //TODO: make sure only admins can access it.
