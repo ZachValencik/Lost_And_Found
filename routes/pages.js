@@ -51,12 +51,14 @@ router.post('/login', async (req, res) => {
   console.log(`Trying to Log In as ${email}`);
   if(err){
     //console.log("Wrong Email or Password")
+    res.status(400);
     return res.render('login',{
 
         message:'Wrong Email or Password!'
     })
   }
   else if(rows.length==0) {
+    res.status(400);
     console.log("Wrong Email or Password")
     return res.render('login',{
         message:'Wrong Email or Password!'
@@ -68,8 +70,9 @@ router.post('/login', async (req, res) => {
   req.session.email = email;
   req.session.admin = rows[0].is_admin;
   console.log(rows[0].is_admin)
-  res.redirect('/')
+  res.redirect(200,'/')
   }else{
+    res.status(400)
     return res.render('login',{
         message:`Wrong Email or Password!`
     })
@@ -82,10 +85,15 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', (req, res) => {
 
-      if(req.session.email)
+      if(req.session.email){
+
         req.session.destroy()
-        
-    res.redirect('/')
+        req.session=null;
+        res.redirect(200,'/')
+      }else{
+        res.redirect(400,'/')
+      }
+    
 })
 
 
@@ -361,7 +369,7 @@ router.post('/items', (req, res) => {
 
     if(!err)
     res.send(row)
-   //// console.log(rows[0].floors)
+   // console.log(rows[0].floors)
     else
     console.log(err);
     
