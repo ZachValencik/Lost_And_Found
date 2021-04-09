@@ -360,9 +360,6 @@ router.get('/items/:category', (req, res) => {
 
 })
 
-
-
-
 router.post('/items', (req, res) => {
 
   let emp = req.body;
