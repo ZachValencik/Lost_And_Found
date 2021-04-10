@@ -114,12 +114,40 @@ $(document).ready(function(){
           let oStr = `<h2>Items Claimed</h2>`;
           let oStr2 = `<h2>Items Not Claimed</h2>`;
         
-          oStr += "<table border='1'> ";
-          oStr2+="<table border='1'> ";
+          oStr += '<table class="table align-middle table-bordered table-striped table-dark table-hover" align="center">';
+          oStr2+='<table class="table align-middle table-bordered table-striped table-dark table-hover" align="center">';
           oStr += `<tr><th>ID</th><th>Item</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
           <th>Claimed By</th><th>Claimed Description</th></tr>`;
+          `<thead class="thead-dark">
+          <tr>
+              <th>ID</th>
+              <th>Item</th>
+              <th>Description</th>
+              <th>Lost Location</th>
+              <th>Room #</th>
+              <th>Found by</th>
+              <th>Found by Description</th>
+              <th>Date Found</th>
+              <th>Claimed By</th>
+              <th>Claimed Description</th>
+          </tr>
+      </thead><tbody>`;
           oStr2+=`<tr><th>ID</th><th>Item</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
           <th>Claimed By</th><th>Claimed Description</th></tr>`;
+          `<thead class="thead-dark">
+          <tr>
+              <th>ID</th>
+              <th>Item</th>
+              <th>Description</th>
+              <th>Lost Location</th>
+              <th>Room #</th>
+              <th>Found by</th>
+              <th>Found by Description</th>
+              <th>Date Found</th>
+              <th>Claimed By</th>
+              <th>Claimed Description</th>
+          </tr>
+      </thead><tbody>`;
          // alert("success");
           console.log(`data:`);
           console.log( data );
@@ -150,9 +178,9 @@ $(document).ready(function(){
 
           }
 
-          oStr += `</table>`;
+          oStr += `</tbody></table>`;
           oStr += `<br>`;
-          oStr2+=`</table>`;
+          oStr2+=`</tbody></table>`;
           //id.innerHTML = oStr;
           $("#test").html(oStr+oStr2);
       },
