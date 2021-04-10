@@ -36,13 +36,13 @@ $(document).ready(function(){
                 
                 if(v===data[i].item_category && data[i].claimed_by===null){
                 count++;
-                let ti = data[i].item_id;
+                let id = data[i].item_id;
                 let cat = data[i].item_category;
-                let c = data[i].item_location;
+                let loc = data[i].item_location;
                 let room = data[i].item_room;
                 let dateFound = data[i].date_found;
                 
-                oStr2 += `<tr><td>${ti}</td><td>${cat}</td><td>${c}</td><td>${room}</td><td>${dateFound}</td>`;
+                oStr2 += `<tr><td>${id}</td><td>${cat}</td><td>${loc}</td><td>${room}</td><td>${dateFound}</td>`;
                 //oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr2 += `</tr>`;
                 
@@ -50,9 +50,20 @@ $(document).ready(function(){
            
           }
           oStr += `<h2>${v}-Number of items-${count}</h2>`;
-          oStr += "<table border='1'> ";
-          oStr += `<tr><th>ID</th><th>Category</th><th>Where Found</th><th>Room #</th><th>Date Found</th></tr>`;
-          oStr+=oStr2;
+          oStr += '<table class="table align-middle table-bordered table-striped table-dark table-hover" align="center">';
+          
+          //oStr += `<tr><th>ID</th><th>Category</th><th>Where Found</th><th>Room #</th><th>Date Found</th></tr>`;
+          oStr += `<thead class="thead-dark">
+          <tr>
+              <th>ID</th>
+              <th>Category</th>
+              <th>Where Found</th>
+              <th>Room #</th>
+              <th>Date Found</th>
+          </tr>
+      </thead>`;
+          oStr+='<tbody>'
+          oStr+=oStr2+"</tbody>";
           oStr2=``;
           count=0;
           oStr += `</table>`;
