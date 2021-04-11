@@ -1,5 +1,24 @@
 
+function deleteIt(id){
+  console.log(`Trying Deleting ${id}`)
+  let URL = `http://localhost:5000/items/${id}`;
+    $.ajax({
+      url: URL,
+      contentType: 'application/json',
+      async: true,
+      type: 'DELETE',
+      success: function(data){
+        console.log("Sucess! The Id has been deleted")
+        console.log(data)
+        
 
+
+      },
+      error : function( xhr, status, error ) {
+        alert("Error");
+      }
+    })
+}
 // The Monthy report- Sort the Items found to one table and not clamied to another
 /*
 6.	Items Report Per Month - DONE
@@ -77,11 +96,11 @@ $(document).ready(function(){
                 if(dateSplit[1]==month){
                   if(claimedBy!=null){
                 oStr += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-               // oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr += `</tr>`;
                   }else {
                 oStr2 += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-               // oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+                oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
                 oStr2 += `</tr>`;
                   }
                 }
