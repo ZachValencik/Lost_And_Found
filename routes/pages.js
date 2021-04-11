@@ -348,7 +348,7 @@ router.get('/items', (req, res) => {
 })
 
 router.get('/items/:category', (req, res) => {
-  mysqlConnection.query('Select * from item where category = ? ',[req.params.category],(err,rows,fields)=>{
+  mysqlConnection.query('Select * from item where item_category = ? ',[req.params.category],(err,rows,fields)=>{
 
     if(!err)
     res.send(rows)
