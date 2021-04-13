@@ -39,6 +39,9 @@ nav img {
 h2 {
     color:rgb(36, 62, 138);
 }
+#number {
+   text-align: center;
+}
 
 #AUMap {
     display: block;
