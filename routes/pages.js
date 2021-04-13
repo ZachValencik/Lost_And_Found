@@ -367,12 +367,23 @@ router.post('/items', (req, res) => {
 
   let emp = req.body;
 
-  mysqlConnection.query('insert into item (item_name,item_category,item_desc,item_location,item_room,found_by,date_found) Values (?,?,?,?,?,?,?)',[emp.item_name,emp.item_category,emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.date_found],(err,row,fields)=>{
+  mysqlConnection.query
+  ('insert into item (item_id,item_name,item_category,item_value,item_desc,item_location,item_room,found_by,date_found) Values (?,?,?,?,?,?,?,?,?)',
+  [emp.item_id,emp.item_name,emp.item_category,emp.item_value,
+    emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.date_found],(err,row,fields)=>{
 
-    if(!err)
-    res.send(row)
+    if(!err){
+
+    let message = {
+      status:200,
+      message: `Item ${emp.item_name} has been added to DB` 
+    }
+    res.status(200)
+    res.send(message)
+  }
    // console.log(rows[0].floors)
-    else
+    else{
+    }
     console.log(err);
     
   })
@@ -384,9 +395,9 @@ router.post('/items', (req, res) => {
 
 router.put('/items/:item_id', (req, res) => {
   let emp = req.body
-  let query = 'update item set item_name = ?, item_category = ?, item_desc = ?, item_location = ?,\
+  let query = 'update item set item_id =?, item_name = ?, item_category = ?, item_value =?, item_desc = ?, item_location = ?,\
    item_room = ?, found_by = ?, found_by_desc = ?, date_found = ?, claimed_by =?, claimed_desc = ? where item_id = ?'
-  mysqlConnection.query(query,[emp.item_name,emp.item_category,emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.found_by_desc,emp.date_found,emp.claimed_by,emp.claimed_desc,req.params.item_id],(err,row,fields)=>{
+  mysqlConnection.query(query,[emp.item_id,emp.item_name,emp.item_category,emp.item_value,emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.found_by_desc,emp.date_found,emp.claimed_by,emp.claimed_desc,req.params.item_id],(err,row,fields)=>{
     
     if(row.affectedRows!=0){
       res.send(`Updated ${req.params.item_id}`)
