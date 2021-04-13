@@ -23,25 +23,40 @@ function deleteIt(id){
 function insertNew() {
   alert("Trying to Insert a Lost Item in DB!");
   // the code that will ajac call to insert stuff
-/*
+  console.log($("#item_name").val())
+  console.log($("#item_category").val())
+  console.log($("#item_value").val())
+  console.log($("#item_desc").val())
+  console.log($("#item_location").val())
+  console.log($("#item_room").val())
+  console.log($("#found_by").val())
+  console.log($("#found_by_desc").val())
+  console.log($("#date_found").val())
+  let itemObj = {
+    item_name: $("#item_name").val(),
+    item_category: $("#item_category").val(),
+    item_value: $("#item_value").val(),
+    item_desc: $("#item_desc").val(),
+    item_location: $("#item_location").val(),
+    item_room: $("#item_room").val(),
+    found_by: $("#found_by").val(),
+    found_by_desc: $("#found_by_desc").val(),
+    date_found: $("#date_found").val(),
+  }
+  console.log(itemObj)
+
 //let task = $("#task").val();
 //let status = $("#status").val();
-alert(`t:${task} s:${status}`);
 let URL = "http://localhost:5000/items"
-let d = {
-  task: `${task}`,
-  status:`${status}`
-}
+
 $.ajax({
   url: URL,
   contentType: 'application/json',
   type: 'POST',
-  data : JSON.stringify(d),
+  data : JSON.stringify(itemObj),
   success: function (data){
-    let oStr = "<h2>Success</h2>"
-    console.log(`Success!`)
+    
     console.log(data)
-
   },
   error : function( xhr, status, error ) {
     alert( "Error");
@@ -51,7 +66,7 @@ $.ajax({
 
 
 })
-*/
+
 
 
 }
