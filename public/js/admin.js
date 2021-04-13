@@ -19,12 +19,53 @@ function deleteIt(id){
       }
     })
 }
+
+function insertNew() {
+  alert("Trying to Insert a Lost Item in DB!");
+  // the code that will ajac call to insert stuff
+/*
+//let task = $("#task").val();
+//let status = $("#status").val();
+alert(`t:${task} s:${status}`);
+let URL = "http://localhost:5000/items"
+let d = {
+  task: `${task}`,
+  status:`${status}`
+}
+$.ajax({
+  url: URL,
+  contentType: 'application/json',
+  type: 'POST',
+  data : JSON.stringify(d),
+  success: function (data){
+    let oStr = "<h2>Success</h2>"
+    console.log(`Success!`)
+    console.log(data)
+
+  },
+  error : function( xhr, status, error ) {
+    alert( "Error");
+    console.log(`AJAX ERROR`)
+    console.log( error );
+  }
+
+
+})
+*/
+
+
+}
+
+function clearClaimed() {
+  $("#test").html("");
+}
 // The Monthy report- Sort the Items found to one table and not clamied to another
 /*
 6.	Items Report Per Month - DONE
 Provide a way for a privileged user to list out all recovered and non-recovered items found in a given month. 
 For example, AU police should be able to list out all items found in January that were recovered by a user, 
 when they were found, when they were claimed and who claimed them.
+
 */
 $(document).ready(function(){
 
@@ -46,12 +87,13 @@ $(document).ready(function(){
           
             oStr += '<table class="table align-middle table-bordered table-striped table-dark table-hover" align="center">';
             oStr2+='<table class="table align-middle table-bordered table-striped table-dark table-hover" align="center">';
-            oStr += `<tr><th>ID</th><th>Item</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
+            oStr += `<tr><th>ID</th><th>Item</th><th>Item Approx Value</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
             <th>Claimed By</th><th>Claimed Description</th></tr>`;
             `<thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Item</th>
+                <th>Item Approx Value</th>
                 <th>Description</th>
                 <th>Lost Location</th>
                 <th>Room #</th>
@@ -62,12 +104,13 @@ $(document).ready(function(){
                 <th>Claimed Description</th>
             </tr>
         </thead><tbody>`;
-            oStr2+=`<tr><th>ID</th><th>Item</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
+            oStr2+=`<tr><th>ID</th><th>Item</th><th>Item Approx Value</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
             <th>Claimed By</th><th>Claimed Description</th></tr>`;
             `<thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Item</th>
+                <th>Item Approx Value</th>
                 <th>Description</th>
                 <th>Lost Location</th>
                 <th>Room #</th>
@@ -82,10 +125,11 @@ $(document).ready(function(){
             console.log(`data:`);
             console.log( data );
             for (let i=0; i<data.length; i++){
-                let ti = data[i].item_id;
-                let t = data[i].item_name;
-                let s = data[i].item_desc;
-                let c = data[i].item_location;
+                let id = data[i].item_id;
+                let name = data[i].item_name;
+                let value = data[i].item_value;
+                let desc = data[i].item_desc;
+                let location = data[i].item_location;
                 let room = data[i].item_room;
                 let foundBy = data[i].found_by;
                 let foundByDesc = data[i].found_by_desc;
@@ -95,12 +139,12 @@ $(document).ready(function(){
                 let claimedDesc = data[i].claimed_desc;
                 if(dateSplit[1]==month){
                   if(claimedBy!=null){
-                oStr += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+                oStr += `<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${id})">Delete ${id} </button> </td>`;
                 oStr += `</tr>`;
                   }else {
-                oStr2 += `<tr><td>${ti}</td><td>${t}</td><td>${s}</td><td>${c}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
+                oStr2 += `<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${id})">Delete ${id} </button> </td>`;
                 oStr2 += `</tr>`;
                   }
                 }
