@@ -9,3 +9,6 @@ maybe will help with testing later
 
 //Handle bars if, and loop statements
 https://handlebarsjs.com/guide/builtin-helpers.html#if
+
+TO DO by 4-16...
+Get the app to record that the item was found outside a building. Its one of the requirm,ents for the project.
