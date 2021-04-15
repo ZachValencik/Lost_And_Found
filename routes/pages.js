@@ -4,8 +4,6 @@ const mysql = require('mysql')
 
 require('dotenv/config')
 
-
-
 let mysqlConnection = mysql.createConnection({
     host: process.env.host,
     user: process.env.user,
