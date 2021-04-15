@@ -21,14 +21,16 @@ function deleteIt(id){
       async: true,
       type: 'DELETE',
       success: function(data){
+        
         console.log("Sucess! The Id has been deleted")
         console.log(data)
         
-
-
+        
       },
       error : function( xhr, status, error ) {
         alert("Error");
+        
+        
       }
     })
 }

@@ -1,8 +1,11 @@
+
 describe('Lost and found test ', function() {
+ 
     context( "Admin", function() {
+ 
       it( "Post an Lost Item", function(){
       
-          
+      
         
         
   
@@ -15,9 +18,8 @@ describe('Lost and found test ', function() {
       
           
         
-        
-  
-      chai.assert.equal(3,3);
+   
+    chai.assert.isTrue(true);
 
 
   });

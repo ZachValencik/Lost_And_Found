@@ -422,7 +422,13 @@ router.delete('/items/:item_id', (req, res) => {
   mysqlConnection.query('Delete from item where item_id = ?',[req.params.item_id],(err,row,fields)=>{
     
     if(row.affectedRows!=0){
-      res.send(`Deleted ${req.params.item_id}`)
+      let errorMessage = {
+        status:200,
+        message: ` deleted ${req.params.item_id}` 
+      }
+      
+      res.status(200)
+      res.send(errorMessage)
       
     }
     else{
