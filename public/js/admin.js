@@ -1,4 +1,17 @@
 
+function checkBox(){
+  let checkBox = document.getElementById("outside");
+  // Get the output text
+  let room = document.getElementById("item_room");
+  if (checkBox.checked == true){
+    room.style.display = "none";
+  } else {
+    room.style.display = "block";
+  }
+}
+
+
+
 function deleteIt(id){
   console.log(`Trying Deleting ${id}`)
   let URL = `http://localhost:5000/items/${id}`;
