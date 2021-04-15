@@ -1,5 +1,5 @@
 describe('Lost and found test ', function() {
-    context( "Post", function() {
+    context( "GET", function() {
       it( "Login", function(){
   
 
@@ -12,6 +12,7 @@ describe('Lost and found test ', function() {
     });
 
     });
+    
   
   
   
