@@ -34,16 +34,7 @@ describe('Lost and found test ', function() {
 });
     });
     context( "Non-Admin Users", function() {
-      it( "Login", function(){
       
-          
-        
-        
-  
-        chai.assert.equal(3,3);
-    
-    
-    });
       it( "Display Campus Data", function(){
       
           
@@ -66,16 +57,6 @@ describe('Lost and found test ', function() {
 
   });
 
-it( "Logout", function(){
-      
-          
-        
-        
-  
-  chai.assert.equal(3,3);
-
-
-});
 
 
     });
