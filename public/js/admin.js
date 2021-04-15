@@ -45,17 +45,33 @@ function insertNew() {
   console.log($("#found_by").val())
   console.log($("#found_by_desc").val())
   console.log($("#date_found").val())
-  let itemObj = {
+  let itemObj = {}
+  if(document.getElementById("outside")){
+  itemObj = {
     item_name: $("#item_name").val(),
     item_category: $("#item_category").val(),
     item_value: $("#item_value").val(),
     item_desc: $("#item_desc").val(),
     item_location: $("#item_location").val(),
+    item_outside: 1,
     item_room: $("#item_room").val(),
     found_by: $("#found_by").val(),
     found_by_desc: $("#found_by_desc").val(),
     date_found: $("#date_found").val(),
   }
+}else{
+  itemObj = {
+    item_name: $("#item_name").val(),
+    item_category: $("#item_category").val(),
+    item_value: $("#item_value").val(),
+    item_desc: $("#item_desc").val(),
+    item_location: $("#item_location").val(),
+    item_outside: 0,
+    found_by: $("#found_by").val(),
+    found_by_desc: $("#found_by_desc").val(),
+    date_found: $("#date_found").val(),
+  }
+}
   console.log(itemObj)
 
 //let task = $("#task").val();
@@ -158,6 +174,7 @@ $(document).ready(function(){
                 let value = data[i].item_value;
                 let desc = data[i].item_desc;
                 let location = data[i].item_location;
+                let outside = data[i].item_outside;
                 let room = data[i].item_room;
                 let foundBy = data[i].found_by;
                 let foundByDesc = data[i].found_by_desc;
@@ -167,11 +184,15 @@ $(document).ready(function(){
                 let claimedDesc = data[i].claimed_desc;
                 if(dateSplit[1]==month){
                   if(claimedBy!=null){
-                oStr += `<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                    if(outside==1)
+                        oStr += `<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>Found Outside</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                    else  oStr +=`<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
                 oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${id})">Delete ${id} </button> </td>`;
                 oStr += `</tr>`;
                   }else {
-                oStr2 += `<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                if(outside==1)
+                  oStr2 += `<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>Found Outside</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                  else oStr2+=`<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
                 oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${id})">Delete ${id} </button> </td>`;
                 oStr2 += `</tr>`;
                   }

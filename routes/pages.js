@@ -368,9 +368,9 @@ router.post('/items', (req, res) => {
   let emp = req.body;
 
   mysqlConnection.query
-  ('insert into item (item_id,item_name,item_category,item_value,item_desc,item_location,item_room,found_by,found_by_desc,date_found) Values (?,?,?,?,?,?,?,?,?,?)',
+  ('insert into item (item_id,item_name,item_category,item_value,item_desc,item_location,item_outside,item_room,found_by,found_by_desc,date_found) Values (?,?,?,?,?,?,?,?,?,?,?)',
   [emp.item_id,emp.item_name,emp.item_category,emp.item_value,
-    emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.found_by_desc,emp.date_found],(err,row,fields)=>{
+    emp.item_desc,emp.item_location,emp.item_outside,emp.item_room,emp.found_by,emp.found_by_desc,emp.date_found],(err,row,fields)=>{
 
     if(!err){
 
