@@ -26,6 +26,7 @@
     "install": "^0.13.0",
     "mocha": "^8.3.0",
     "passport": "^0.4.1",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "sinon": "^10.0.0"
   }
 }
