@@ -5,7 +5,8 @@ describe('Lost and found test ', function() {
     context( "Admin", function() {
       it( "CheckBox is checked", function(){
         
-        $('#item_room').should.exist;
+        
+        
     });
  
       it( "Post an Lost Item", function(){
