@@ -1,7 +1,12 @@
-
+chai.should()
+//https://www.chaijs.com/plugins/chai-jquery/
 describe('Lost and found test ', function() {
- 
+
     context( "Admin", function() {
+      it( "CheckBox is checked", function(){
+        
+    
+    });
  
       it( "Post an Lost Item", function(){
       
