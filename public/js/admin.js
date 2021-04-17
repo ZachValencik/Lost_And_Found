@@ -180,7 +180,7 @@ $(document).ready(function(){
                 let room = data[i].item_room;
                 let foundBy = data[i].found_by;
                 let foundByDesc = data[i].found_by_desc;
-                let dateFound = data[i].date_found;
+                let dateFound = data[i].date_found.substring(0,10);
                 let dateSplit = dateFound.split("-");
                 let claimedBy = data[i].claimed_by;
                 let claimedDesc = data[i].claimed_desc;

@@ -41,7 +41,8 @@ $(document).ready(function(){
                 let loc = data[i].item_location;
                 let room = data[i].item_room;
                 let outside = data[i].item_outside;
-                let dateFound = data[i].date_found;
+                let dateFound = data[i].date_found.substring(0,10);
+                
                 if(outside==1){
                   oStr2 += `<tr><td>${id}</td><td>${cat}</td><td>${loc}</td><td>Found Outside</td><td>${dateFound}</td>`;
                 }else {
