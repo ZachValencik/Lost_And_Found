@@ -36,7 +36,6 @@ $(document).ready(function(){
                 
                 if(v===data[i].item_category && data[i].claimed_by===null){
                 count++;
-                let id = data[i].item_id;
                 let cat = data[i].item_category;
                 let loc = data[i].item_location;
                 let room = data[i].item_room;
@@ -44,9 +43,9 @@ $(document).ready(function(){
                 let dateFound = data[i].date_found.substring(0,10);
                 
                 if(outside==1){
-                  oStr2 += `<tr><td>${id}</td><td>${cat}</td><td>${loc}</td><td>Found Outside</td><td>${dateFound}</td>`;
+                  oStr2 += `<td>${cat}</td><td>${loc}</td><td>Found Outside</td><td>${dateFound}</td>`;
                 }else {
-                  oStr2 += `<tr><td>${id}</td><td>${cat}</td><td>${loc}</td><td>${room}</td><td>${dateFound}</td>`;
+                  oStr2 += `<td>${cat}</td><td>${loc}</td><td>${room}</td><td>${dateFound}</td>`;
                 }
                 
                 //oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${ti})">Delete ${ti} </button> </td>`;
@@ -61,7 +60,6 @@ $(document).ready(function(){
           //oStr += `<tr><th>ID</th><th>Category</th><th>Where Found</th><th>Room #</th><th>Date Found</th></tr>`;
           oStr += `<thead class="thead-dark">
           <tr>
-              <th>ID</th>
               <th>Category</th>
               <th>Where Found</th>
               <th>Room #</th>

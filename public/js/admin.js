@@ -133,12 +133,13 @@ $(document).ready(function(){
           
             oStr += '<table class="table align-middle table-bordered table-striped table-dark table-hover" align="center">';
             oStr2+='<table class="table align-middle table-bordered table-striped table-dark table-hover" align="center">';
-            oStr += `<tr><th>ID</th><th>Item</th><th>Item Approx Value</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
+            oStr += `<tr><th>ID</th><th>Item</th><th>Category</th><th>Item Approx Value</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
             <th>Claimed By</th><th>Claimed Description</th></tr>`;
             `<thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Item</th>
+                <th>Category</th>
                 <th>Item Approx Value</th>
                 <th>Description</th>
                 <th>Lost Location</th>
@@ -150,12 +151,13 @@ $(document).ready(function(){
                 <th>Claimed Description</th>
             </tr>
         </thead><tbody>`;
-            oStr2+=`<tr><th>ID</th><th>Item</th><th>Item Approx Value</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
+            oStr2+=`<tr><th>ID</th><th>Item</th><th>Category</th><th>Item Approx Value</th><th>Description</th><th>Lost Location</th><th>Room #</th><th>Found By</th><th>Found By Description</th><th>Date Found</th>
             <th>Claimed By</th><th>Claimed Description</th></tr>`;
             `<thead class="thead-dark">
             <tr>
                 <th>ID</th>
                 <th>Item</th>
+                <th>Category</th>
                 <th>Item Approx Value</th>
                 <th>Description</th>
                 <th>Lost Location</th>
@@ -172,6 +174,7 @@ $(document).ready(function(){
             console.log( data );
             for (let i=0; i<data.length; i++){
                 let id = data[i].item_id;
+                let cat = data[i].item_category
                 let name = data[i].item_name;
                 let value = data[i].item_value;
                 let desc = data[i].item_desc;
@@ -187,14 +190,14 @@ $(document).ready(function(){
                 if(dateSplit[1]==month){
                   if(claimedBy!=null){
                     if(outside==1)
-                        oStr += `<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>Found Outside</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                    else  oStr +=`<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                        oStr += `<tr><td>${id}</td><td>${name}</td><td>${cat}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>Found Outside</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                    else  oStr +=`<tr><td>${id}</td><td>${name}</td><td>${cat}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
                 oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${id})">Delete ${id} </button> </td>`;
                 oStr += `</tr>`;
                   }else {
                 if(outside==1)
-                  oStr2 += `<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>Found Outside</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                  else oStr2+=`<tr><td>${id}</td><td>${name}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                  oStr2 += `<tr><td>${id}</td><td>${name}</td><td>${cat}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>Found Outside</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                  else oStr2+=`<tr><td>${id}</td><td>${name}</td><td>${cat}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
                 oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${id})">Delete ${id} </button> </td>`;
                 oStr2 += `</tr>`;
                   }
