@@ -125,7 +125,6 @@ $(document).ready(function(){
         async: true,
         crossDomain : true,
         success : function( data ){
-          if(data.length==0) console.log("NO DATA!")
           let month = document.getElementById("selectMonth").value;
          // console.log("hello "+ month);
             
