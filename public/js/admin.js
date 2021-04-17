@@ -125,8 +125,9 @@ $(document).ready(function(){
         async: true,
         crossDomain : true,
         success : function( data ){
+          if(data.length==0) console.log("NO DATA!")
           let month = document.getElementById("selectMonth").value;
-          console.log("hello "+ month);
+         // console.log("hello "+ month);
             
             let oStr = `<h2>Items Claimed</h2>`;
             let oStr2 = `<h2>Items Not Claimed</h2>`;
