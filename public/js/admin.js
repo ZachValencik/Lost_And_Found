@@ -10,6 +10,18 @@ function checkBox(){
   }
 }
 
+function revealInsert(){
+  let checkBox = document.getElementById("reveal");
+  // Get the output text
+  let form = document.getElementById("insertItem");
+
+  if (checkBox.checked == true){
+    form.style.display = "block";
+  } else {
+    form.style.display = "none";
+  }
+}
+
 
 
 function deleteIt(id){
@@ -229,4 +241,7 @@ $(document).ready(function(){
   
   
   
+  $(document).ready(function(){
+
   
+  })
