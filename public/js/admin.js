@@ -9,6 +9,9 @@ function checkBox(){
     room.style.display = "block";
   }
 }
+function displayItForEdit(id){
+  alert(`Revealing the Editing HTML for ${id} `)
+}
 
 function revealInsert(){
   let checkBox = document.getElementById("reveal");
@@ -34,9 +37,9 @@ function deleteIt(id){
       type: 'DELETE',
       success: function(data){
         
-        console.log("Sucess! The Id has been deleted")
+        console.log(`Sucess! The ID:${id} has been deleted`)
         console.log(data)
-        
+        window.location.reload();
         
       },
       error : function( xhr, status, error ) {
@@ -204,13 +207,15 @@ $(document).ready(function(){
                     if(outside==1)
                         oStr += `<tr><td>${id}</td><td>${name}</td><td>${cat}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>Found Outside</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
                     else  oStr +=`<tr><td>${id}</td><td>${name}</td><td>${cat}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
+                oStr += `<td> <button type="button" class="btn btn-primary" onClick="displayItForEdit(${id})">Edit It ${id} </button> </td>`;
                 oStr += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${id})">Delete ${id} </button> </td>`;
                 oStr += `</tr>`;
                   }else {
                 if(outside==1)
                   oStr2 += `<tr><td>${id}</td><td>${name}</td><td>${cat}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>Found Outside</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
                   else oStr2+=`<tr><td>${id}</td><td>${name}</td><td>${cat}</td><td>${value}</td><td>${desc}</td><td>${location}</td><td>${room}</td><td>${foundBy}</td><td>${foundByDesc}</td><td>${dateFound}</td><td>${claimedBy}</td><td>${claimedDesc}</td>`;
-                oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${id})">Delete ${id} </button> </td>`;
+                oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="displayItForEdit(${id})">Edit</button> </td>`;
+                oStr2 += `<td> <button type="button" class="btn btn-primary" onClick="deleteIt(${id})">Delete</button> </td>`;
                 oStr2 += `</tr>`;
                   }
                 }
