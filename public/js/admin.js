@@ -138,10 +138,25 @@ function displayItForEdit(id){
     crossDomain : true,
     success: function(data){
       console.log(data);
-     // let ostr=`<p>`;
+      let str = `<h2> Update of id:${id} </h2>`;
+      str += `<input type='text' name='item_name' id='item_name' value='${data[0].item_name}'>`;
+      str += `<input type='text' name='item_category' id='item_category' value=${data[0].item_category}>`;
+      str += `<input type='text' name='item_value' id='item_value' value=${data[0].item_value}>`;
+      str += `<input type='text' name='item_desc' id='item_desc' value=${data[0].item_desc}>`;
+      str += `<input type='text' name='item_location' id='item_location' value=${data[0].item_location}>`;
+      str += `<input type='text' name='item_outside' id='item_outside' value=${data[0].item_outside}>`;
+      str += `<input type='text' name='item_room' id='item_room' value=${data[0].item_room}>`;
+      str += `<input type='text' name='found_by' id='found_by' value=${data[0].found_by}>`;
+      str += `<input type='text' name='found_by_desc' id='found_by_desc' value=${data[0].found_by_desc}>`;
+      str += `<input type='date' name='date_found' id='date_found' value=${data[0].date_found}>`;
+      //str += `<label for="claimed_by_put">Claimed By</label><br>`
+      str += `<input type='text' name='claimed_by_put' id='claimed_by_put' value=${data[0].claimed_by}><br>`
+      //str += `<label for="claimed_desc_put">Claimed By Information</label><br>`
+      str += `<input type='text' name='claimed_desc_put' id='claimed_desc_put' value=${data[0].claimed_desc}><br>`;
+      str += `<button type="button" class="btn btn-primary" onClick="sendTheUpdate(${id})">Update ${id} </button> `;
      
 
-    $("#editItem").html(`<p> This is where the html will go to edit ID:${data[0].item_id}</p>`);
+    $("#editItem").html(str);
 
     
     },
@@ -153,6 +168,11 @@ function displayItForEdit(id){
   })
 
 }
+
+function sendTheUpdate(id){
+alert(`updating ID:${id}`)
+}
+
 $(document).ready(function(){
 
     $("#displayByMonth").click(function(){
@@ -271,7 +291,4 @@ $(document).ready(function(){
   
   
   
-  $(document).ready(function(){
-  
-  
-  })
+ 
