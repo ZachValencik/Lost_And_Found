@@ -9,9 +9,7 @@ function checkBox(){
     room.style.display = "block";
   }
 }
-function displayItForEdit(id){
-  alert(`Revealing the Editing HTML for ${id} `)
-}
+
 
 function revealInsert(){
   let checkBox = document.getElementById("reveal");
@@ -128,6 +126,31 @@ For example, AU police should be able to list out all items found in January tha
 when they were found, when they were claimed and who claimed them.
 
 */
+
+function displayItForEdit(id){
+  alert(`Revealing the Editing HTML for ${id} `)
+  let URL = `http://localhost:5000/item/${id}`;
+  $.ajax({
+    url: URL,
+    headers: {'Access-Control-Allow-Origin':'*'}, // <-------- set this
+    contentType: 'application/json',
+    async: true,
+    crossDomain : true,
+    success: function(data){
+      console.log(data);
+      $("#editItem").html(`<p> This is where the html will go to edit ID:${data[0].item_id}</p>`);
+      
+    
+    
+    },
+    error : function( xhr, status, error ) {
+      alert("Error");
+      
+      
+    }
+  })
+
+}
 $(document).ready(function(){
 
     $("#displayByMonth").click(function(){

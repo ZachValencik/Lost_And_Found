@@ -345,6 +345,8 @@ router.get('/items', (req, res) => {
 }
 })
 
+
+
 router.get('/items/:category', (req, res) => {
   mysqlConnection.query('Select * from item where item_category = ? ',[req.params.category],(err,rows,fields)=>{
 
@@ -357,6 +359,20 @@ router.get('/items/:category', (req, res) => {
   })
 
 })
+
+router.get('/item/:id', (req, res) => {
+  mysqlConnection.query('Select * from item where item_id = ? ',[req.params.id],(err,rows,fields)=>{
+
+    if(!err)
+    res.send(rows)
+   // console.log(rows[0].floors)
+    else
+    console.log(err);
+    
+  })
+
+})
+
 
 
 
