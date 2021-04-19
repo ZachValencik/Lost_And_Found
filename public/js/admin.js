@@ -138,9 +138,11 @@ function displayItForEdit(id){
     crossDomain : true,
     success: function(data){
       console.log(data);
-      $("#editItem").html(`<p> This is where the html will go to edit ID:${data[0].item_id}</p>`);
-      
-    
+     // let ostr=`<p>`;
+     
+
+    $("#editItem").html(`<p> This is where the html will go to edit ID:${data[0].item_id}</p>`);
+
     
     },
     error : function( xhr, status, error ) {
