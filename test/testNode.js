@@ -9,6 +9,22 @@ chai.use(chaiHttp)
 describe('#5 Testing 8+ Routes', function() {
 
     context( "Positive Routes", function() {
+
+      it( "Should Log In a normal user ", function(done){
+        let login = {
+          email:'zvalencik01@aurora.edu',
+          password:'password'
+        }
+        chai.request(`http://localhost:5000`).post(`/login`)
+          .send(login)
+          .end((err,res)=>{
+            res.should.have.status(200);
+
+          done()
+          });
+
+      });
+
       it( "Should get all Items Return 200", function(done){
 
         chai.request('http://localhost:5000').get("/items")
