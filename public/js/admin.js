@@ -1,4 +1,4 @@
-
+'use strict'
 function checkBox(){
   let checkBox = document.getElementById("outside");
   // Get the output text

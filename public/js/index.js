@@ -1,3 +1,4 @@
+'use strict'
 /*
 1.	Campus Data - Have a way to properly label each building on campus. 
 It should know how many floors each building has. 

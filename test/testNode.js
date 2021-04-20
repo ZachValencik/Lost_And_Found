@@ -1,3 +1,4 @@
+'use strict'
 import chai from 'chai'
 //let chai = require('chai')
 import chaiHttp from 'chai-http'
@@ -14,6 +15,21 @@ describe('#5 Testing 8+ Routes', function() {
         let login = {
           email:'zvalencik01@aurora.edu',
           password:'password'
+        }
+        chai.request(`http://localhost:5000`).post(`/login`)
+          .send(login)
+          .end((err,res)=>{
+            res.should.have.status(200);
+
+          done()
+          });
+
+      });
+
+      it( "Should Log In an Admin ", function(done){
+        let login = {
+          email:'OfficerFrank@aurora.edu',
+          password:'admin'
         }
         chai.request(`http://localhost:5000`).post(`/login`)
           .send(login)

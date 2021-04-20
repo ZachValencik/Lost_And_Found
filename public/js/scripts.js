@@ -1,3 +1,4 @@
+'use strict'
 //Display all by category
 
 /* 
