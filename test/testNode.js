@@ -1,5 +1,6 @@
 'use strict'
 import chai from 'chai'
+
 //let chai = require('chai')
 import chaiHttp from 'chai-http'
 //let chaiHttp = require('chai-http')
@@ -7,7 +8,7 @@ chai.should()
 chai.use(chaiHttp)
 //https://www.chaijs.com/plugins/chai-jquery/
 //This will use the terminal for testing as browser being picky
-describe('#5 Clear statement of at least 8 route variants. Demonstrate full coverage of tests. ', function() {
+describe('#5  Clear statement of at least 8 route variants. Demonstrate full coverage of tests.', function() {
 
   context( "Positive Routes", function() {
 
