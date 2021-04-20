@@ -5,23 +5,37 @@ import chaiHttp from 'chai-http'
 chai.should()
 chai.use(chaiHttp)
 //https://www.chaijs.com/plugins/chai-jquery/
-//This will use the terminal for testing as browser being picky 
+//This will use the terminal for testing as browser being picky
 describe('#5 Testing 8+ Routes', function() {
 
     context( "Positive Routes", function() {
-      it( "Should get all Items", function(done){
-     
+      it( "Should get all Items Return 200", function(done){
+
         chai.request('http://localhost:5000').get("/items")
         .end((err,res)=>{
           res.should.have.status(200);
-        done()
+          res.body.should.be.a('array');
+          res.body.length.should.not.be.eq(0);
+        done();
         });
-        
+
     });
-    
+
     });
-  
-  
-  
-  
+
+  context( "Negative Routes", function() {
+    it( "Should NOT get all Items", function(done){
+
+      chai.request('http://localhost:5000').get("/itemss")
+        .end((err,res)=>{
+          res.should.have.status(404);
+          done();
+        });
+
+    });
+
+  });
+
+
+
   });
