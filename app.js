@@ -12,7 +12,6 @@ app.use(express.json());
 app.use(bodyParser.json())
 app.use(express.static('public'))
 
-
 //for Staying logged in 
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
