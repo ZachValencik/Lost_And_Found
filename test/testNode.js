@@ -21,6 +21,30 @@ describe('#5 Testing 8+ Routes', function() {
 
     });
 
+      it( "Should return one items Propertys ", function(done){
+        let id = 6
+        chai.request(`http://localhost:5000`).get(`/item/${id}`)
+          .end((err,res)=>{
+            res.should.have.status(200);
+            res.body[0].should.be.a('object');
+            res.body[0].should.have.property('item_id');
+            res.body[0].should.have.property('item_name');
+            res.body[0].should.have.property('item_category');
+            res.body[0].should.have.property('item_value');
+            res.body[0].should.have.property('item_desc');
+            res.body[0].should.have.property('item_location');
+            res.body[0].should.have.property('item_outside');
+            res.body[0].should.have.property('item_room');
+            res.body[0].should.have.property('found_by');
+            res.body[0].should.have.property('found_by_desc');
+            res.body[0].should.have.property('date_found');
+            res.body[0].should.have.property('claimed_by');
+            res.body[0].should.have.property('claimed_desc');
+          done();
+          });
+
+      });
+
     });
 
   context( "Negative Routes", function() {
