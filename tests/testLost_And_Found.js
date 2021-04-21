@@ -1,4 +1,5 @@
 chai.should()
+const expect = chai.expect;
 //https://www.chaijs.com/plugins/chai-jquery/
 describe('Lost and found test ', function() {
 
@@ -8,14 +9,18 @@ describe('Lost and found test ', function() {
         
         
     });
+
+    it( "The Input is reavled", function(){
+      //let checkBox = document.getElementById("reveal");
+    // document.getElementById('reveal').should.have.attr(1)
+      //chai.assert.isTrue(revealInsert());
+        
+        
+    });
  
       it( "Post an Lost Item", function(){
-      
-      
-        
-        
-  
-        chai.assert.equal(3,3);
+     // document.getElementById('item_room').should.have.attr('foo')
+      //chai.assert.equal(3,3);
   
   
     });
@@ -31,12 +36,10 @@ describe('Lost and found test ', function() {
   });
 
   it( "Monthly Report of Lost Items ", function(){
-      
-          
-        
+    //document.querySelector('.displayByMonth').should.have.text('Display Lost Items')            
         
   
-    chai.assert.equal(3,3);
+   // chai.assert.equal(3,3);
 
 
 });
