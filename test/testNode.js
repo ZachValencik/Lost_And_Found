@@ -129,8 +129,32 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
 
     });
 
+    it( "Should PUT An Item", function(done){
+      let item_id = 9000
+      let item = {
+        item_id: 8999,
+        item_name: "Test Item!!",
+        item_category: "Test!!",
+        item_value: 10000,
+        item_desc: "A Test that will be deleted after creation!!!",
+        item_location: "BookStore!!",
+        item_outside: 0,
+        item_room: 1050,
+        found_by: 5,
+        found_by_desc: "['Alex Trance',324542,555-211-1212]",
+        date_found: "2021-02-26"
+      }
+      chai.request(`http://localhost:5000`).put(`/items/${item_id}}`)
+        .send(item)
+        .end((err,res)=>{
+          res.should.have.status(200);
+          done()
+        });
+
+    });
+
     it( "Should Delete An Item", function(done){
-      let item_id =9000;
+      let item_id =8999;
 
       chai.request('http://localhost:5000').delete(`/items/${item_id}`)
         .end((err,res)=>{
