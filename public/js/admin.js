@@ -18,10 +18,10 @@ function revealInsert(){
 
   if (checkBox.checked == true){
     form.style.display = "block";
-    return true;
+    
   } else {
     form.style.display = "none";
-    return false;
+    
   }
 }
 
