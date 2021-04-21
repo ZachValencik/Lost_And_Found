@@ -1,9 +1,9 @@
 'use strict'
-import chai from 'chai'
+//import chai from 'chai'
 
-//let chai = require('chai')
-import chaiHttp from 'chai-http'
-//let chaiHttp = require('chai-http')
+let chai = require('chai')
+//import chaiHttp from 'chai-http'
+let chaiHttp = require('chai-http')
 chai.should()
 chai.use(chaiHttp)
 //https://www.chaijs.com/plugins/chai-jquery/
