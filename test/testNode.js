@@ -147,6 +147,8 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
         .send(login)
         .end((err,res)=>{
           res.should.have.status(400);
+          expect(res).to.have.header('content-type', 'text/html; charset=utf-8'); 
+          expect(res.text).to.contain('Wrong Email or Password!'); // Tests for error message
 
           done()
         });
@@ -177,6 +179,19 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
       chai.request('http://localhost:5000').get("/itemss")
         .end((err,res)=>{
           res.should.have.status(404);
+          done();
+        });
+
+    });
+
+    
+    it( "Should Not Delete An Non-exist Item", function(done){
+      let item_id =9001;
+
+      chai.request('http://localhost:5000').delete(`/items/${item_id}`)
+        .end((err,res)=>{
+          res.should.have.status(400);
+          res.body.should.have.property('message').eql(`Cannot delete ${item_id} since it doesnt exist in database`);
           done();
         });
 
