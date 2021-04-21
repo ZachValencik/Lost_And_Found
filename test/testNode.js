@@ -4,6 +4,7 @@
 let chai = require('chai')
 //import chaiHttp from 'chai-http'
 let chaiHttp = require('chai-http')
+const expect = chai.expect;
 chai.should()
 chai.use(chaiHttp)
 //https://www.chaijs.com/plugins/chai-jquery/
@@ -37,7 +38,7 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
         .end((err,res)=>{
           res.should.have.status(200);
 
-          done()
+        done()
         });
 
     });
@@ -49,7 +50,7 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
           res.should.have.status(200);
           res.body.should.be.a('array');
           res.body.length.should.not.be.eq(0);
-          done();
+        done();
         });
 
     });
@@ -73,7 +74,33 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
           res.body[0].should.have.property('date_found');
           res.body[0].should.have.property('claimed_by');
           res.body[0].should.have.property('claimed_desc');
-          done();
+        done();
+        });
+
+    });
+
+    it( "Should return All Items in a certain Category of items propertys ", function(done){
+      let category = "Bag"
+      chai.request(`http://localhost:5000`).get(`/items/${category}`)
+        .end((err,res)=>{
+          res.should.have.status(200);
+          res.body.should.be.a('array');
+          res.body.length.should.not.be.eq(0);
+          res.body[0].should.be.a('object');
+          res.body[0].should.have.property('item_id');
+          res.body[0].should.have.property('item_name');
+          res.body[0].should.have.property('item_category');
+          res.body[0].should.have.property('item_value');
+          res.body[0].should.have.property('item_desc');
+          res.body[0].should.have.property('item_location');
+          res.body[0].should.have.property('item_outside');
+          res.body[0].should.have.property('item_room');
+          res.body[0].should.have.property('found_by');
+          res.body[0].should.have.property('found_by_desc');
+          res.body[0].should.have.property('date_found');
+          res.body[0].should.have.property('claimed_by');
+          res.body[0].should.have.property('claimed_desc');
+        done();
         });
 
     });
@@ -85,7 +112,7 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
           res.should.have.status(200);
           res.body.should.be.a('array');
           res.body.length.should.not.be.eq(0);
-          done();
+        done();
         });
 
     });
@@ -100,10 +127,12 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
           res.body[0].should.have.property('floor_num');
           res.body[0].should.have.property('room_num');
           res.body[0].should.have.property('hasBasement');
-          done();
+        done();
         });
 
     });
+
+    
 
   });
 
@@ -133,7 +162,8 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
         .send(login)
         .end((err,res)=>{
           res.should.have.status(400);
-
+          expect(res).to.have.header('content-type', 'text/html; charset=utf-8'); 
+          expect(res.text).to.contain('Wrong Email or Password!'); // Tests for error message
           done()
         });
 
