@@ -105,6 +105,44 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
 
     });
 
+
+    it( "Should Post An Item", function(done){
+      let item = {
+        item_id: 9000,
+        item_name: "Test Item",
+        item_category: "Test",
+        item_value: 100000,
+        item_desc: "A Test that will be deleted after creation!",
+        item_location: "BookStore",
+        item_outside: 0,
+        item_room: 105,
+        found_by: 5,
+        found_by_desc: "['Alex Trance',324542,555-211-1212]",
+        date_found: "2021-02-26"
+      }
+      chai.request(`http://localhost:5000`).post(`/items`)
+        .send(item)
+        .end((err,res)=>{
+          res.should.have.status(200);
+          done()
+        });
+
+    });
+
+    it( "Should Delete An Item", function(done){
+      let item_id =9000;
+
+      chai.request('http://localhost:5000').delete(`/items/${item_id}`)
+        .end((err,res)=>{
+          res.should.have.status(200);
+          //res.body.should.have.property('message').eql(`Cannot delete ${item_id} since it doesnt exist in database`);
+          done();
+        });
+
+    });
+
+
+
     it( "Should get all locations", function(done){
 
       chai.request('http://localhost:5000').get("/locations")
