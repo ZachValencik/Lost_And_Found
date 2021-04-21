@@ -173,7 +173,7 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
 
 
 
-
+/*
     it( "Should NOT get all Items", function(done){
 
       chai.request('http://localhost:5000').get("/itemss")
@@ -182,7 +182,7 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
           done();
         });
 
-    });
+    });*/
 
     
     it( "Should Not Delete An Non-exist Item", function(done){
