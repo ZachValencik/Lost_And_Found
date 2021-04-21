@@ -18,11 +18,14 @@ crossorigin="anonymous"></script>
      <nav>
          <a href="/"><img src="img/AULogo.png" alt="HTML tutorial" style="width:60px;height:60px;"></a>
         <ul>
-            <li><a href="/">Home</a></li>
+            <li><a href="/">Map</a></li>
+            <li><a href="/lostItems">Lost Items</a></li> 
+            <li><a href="https://aurora.edu/student-life/campus-services/campus-safety/services.html"target="_blank">Campus Saftey</a></li>
             {{#if isOfficer}} 
             <li><a href="/admin">Admin</a></li>
             {{/if}} 
             {{#if logedIn}}
+            
             <li><a href="/logout">Logout</a></li> 
             {{else}}
             <li><a href="/login">Login</a></li>
@@ -31,11 +34,11 @@ crossorigin="anonymous"></script>
     </nav>
 
     <div>
-        <button type="button" id="displayByCategory" >Show All</button>
+        <button type="button" id="displayByCategory" >Display Lost Items</button>
     </div>
 
 
-
+<h2 id="number">Call To Claim An Item- # 630-844-6140</h2>
     <div> 
        <span id="test"></span>
       </div>

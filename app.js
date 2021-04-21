@@ -1,3 +1,4 @@
+'use strict'
 //https://www.youtube.com/watch?v=4fWWn2Pe2Mk
 //https://aurora.edu/about/maps-directions/
 const express = require('express')
@@ -11,7 +12,6 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.json());
 app.use(bodyParser.json())
 app.use(express.static('public'))
-
 
 //for Staying logged in 
 const cookieParser = require('cookie-parser')

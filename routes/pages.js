@@ -1,10 +1,9 @@
+'use strict'
 const express = require('express')
 const router = express.Router();
 const mysql = require('mysql')
 
 require('dotenv/config')
-
-
 
 let mysqlConnection = mysql.createConnection({
     host: process.env.host,
@@ -347,8 +346,10 @@ router.get('/items', (req, res) => {
 }
 })
 
+
+
 router.get('/items/:category', (req, res) => {
-  mysqlConnection.query('Select * from item where category = ? ',[req.params.category],(err,rows,fields)=>{
+  mysqlConnection.query('Select * from item where item_category = ? ',[req.params.category],(err,rows,fields)=>{
 
     if(!err)
     res.send(rows)
@@ -360,14 +361,11 @@ router.get('/items/:category', (req, res) => {
 
 })
 
-router.post('/items', (req, res) => {
-
-  let emp = req.body;
-
-  mysqlConnection.query('insert into item (item_name,item_category,item_desc,item_location,item_room,found_by,date_found) Values (?,?,?,?,?,?,?)',[emp.item_name,emp.item_category,emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.date_found],(err,row,fields)=>{
+router.get('/item/:id', (req, res) => {
+  mysqlConnection.query('Select * from item where item_id = ? ',[req.params.id],(err,rows,fields)=>{
 
     if(!err)
-    res.send(row)
+    res.send(rows)
    // console.log(rows[0].floors)
     else
     console.log(err);
@@ -379,11 +377,45 @@ router.post('/items', (req, res) => {
 
 
 
+
+router.post('/items', (req, res) => {
+
+  let emp = req.body;
+
+  mysqlConnection.query
+  ('insert into item (item_id,item_name,item_category,item_value,item_desc,item_location,item_outside,item_room,found_by,found_by_desc,date_found) Values (?,?,?,?,?,?,?,?,?,?,?)',
+  [emp.item_id,emp.item_name,emp.item_category,emp.item_value,
+    emp.item_desc,emp.item_location,emp.item_outside,emp.item_room,emp.found_by,emp.found_by_desc,emp.date_found],(err,row,fields)=>{
+
+    if(!err){
+
+    let message = {
+      status:200,
+      message: `Item ${emp.item_name} has been added to DB` 
+    }
+    res.status(200)
+    res.send(message)
+  }
+   // console.log(rows[0].floors)
+    else{
+      console.log(err)
+      res.status(400)
+      res.send(err)
+    }
+    
+    
+  })
+
+})
+
+
+
+
 router.put('/items/:item_id', (req, res) => {
   let emp = req.body
-  let query = 'update item set item_name = ?, item_category = ?, item_desc = ?, item_location = ?,\
+  let query = 'update item set item_id =?, item_name = ?, item_category = ?, item_value =?, item_desc = ?, item_location = ?,\
    item_room = ?, found_by = ?, found_by_desc = ?, date_found = ?, claimed_by =?, claimed_desc = ? where item_id = ?'
-  mysqlConnection.query(query,[emp.item_name,emp.item_category,emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.found_by_desc,emp.date_found,emp.claimed_by,emp.claimed_desc,req.params.item_id],(err,row,fields)=>{
+  mysqlConnection.query(query,[emp.item_id,emp.item_name,emp.item_category,emp.item_value,emp.item_desc,emp.item_location,emp.item_room,emp.found_by,emp.found_by_desc,emp.date_found,emp.claimed_by,emp.claimed_desc,req.params.item_id],(err,row,fields)=>{
     
     if(row.affectedRows!=0){
       res.send(`Updated ${req.params.item_id}`)
@@ -410,7 +442,13 @@ router.delete('/items/:item_id', (req, res) => {
   mysqlConnection.query('Delete from item where item_id = ?',[req.params.item_id],(err,row,fields)=>{
     
     if(row.affectedRows!=0){
-      res.send(`Deleted ${req.params.item_id}`)
+      let errorMessage = {
+        status:200,
+        message: ` deleted ${req.params.item_id}` 
+      }
+      
+      res.status(200)
+      res.send(errorMessage)
       
     }
     else{
