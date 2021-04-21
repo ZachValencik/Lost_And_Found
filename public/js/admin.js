@@ -142,19 +142,19 @@ function displayItForEdit(id){
       console.log(data);
       let str = `<h2> Update of id:${id} </h2>`;
       str += `<input type='text' name='item_name_put' id='item_name_put' value='${data[0].item_name}'>`;
-      str += `<input type='text' name='item_category_put' id='item_category_put' value=${data[0].item_category}>`;
-      str += `<input type='text' name='item_value_put' id='item_value_put' value=${data[0].item_value}>`;
-      str += `<input type='text' name='item_desc_put' id='item_desc_put' value=${data[0].item_desc}>`;
-      str += `<input type='text' name='item_location_put' id='item_location_put' value=${data[0].item_location}>`;
-      str += `<input type='text' name='item_outside_put' id='item_outside_put' value=${data[0].item_outside}>`;
-      str += `<input type='text' name='item_room_put' id='item_room_put' value=${data[0].item_room}>`;
-      str += `<input type='text' name='found_by_put' id='found_by_put' value=${data[0].found_by}>`;
-      str += `<input type='text' name='found_by_desc_put' id='found_by_desc_put' value=${data[0].found_by_desc}>`;
-      str += `<input type='date' name='date_found_put' id='date_found_put' value=${data[0].date_found}>`;
+      str += `<input type='text' name='item_category_put' id='item_category_put' value='${data[0].item_category}'>`;
+      str += `<input type='text' name='item_value_put' id='item_value_put' value='${data[0].item_value}'>`;
+      str += `<input type='text' name='item_desc_put' id='item_desc_put' value='${data[0].item_desc}'>`;
+      str += `<input type='text' name='item_location_put' id='item_location_put' value='${data[0].item_location}'>`;
+      str += `<input type='text' name='item_outside_put' id='item_outside_put' value='${data[0].item_outside}'>`;
+      str += `<input type='text' name='item_room_put' id='item_room_put' value='${data[0].item_room}'>`;
+      str += `<input type='text' name='found_by_put' id='found_by_put' value='${data[0].found_by}'>`;
+      str += `<input type='text' name='found_by_desc_put' id='found_by_desc_put' value="${data[0].found_by_desc}">`;
+      str += `<input type='date' name='date_found_put' id='date_found_put' value='${data[0].date_found}'>`;
       //str += `<label for="claimed_by_put">Claimed By</label><br>`
-      str += `<input type='text' name='claimed_by_put' id='claimed_by_put' value=${data[0].claimed_by}><br>`
+      str += `<input type='text' name='claimed_by_put' id='claimed_by_put' value="${data[0].claimed_by}"><br>`
       //str += `<label for="claimed_desc_put">Claimed By Information</label><br>`
-      str += `<input type='text' name='claimed_desc_put' id='claimed_desc_put' value=${data[0].claimed_desc}><br>`;
+      str += `<input type='text' name='claimed_desc_put' id='claimed_desc_put' value="${data[0].claimed_desc}"><br>`;
       str += `<button type="button" class="btn btn-primary" onClick="sendTheUpdate(${id})">Update ${id} </button> `;
      
 
