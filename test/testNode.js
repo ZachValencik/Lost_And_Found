@@ -314,9 +314,23 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
 
     });
 
-
+    it( "Should Not Delete An non-existant Location", function(done){
+      let location_name = "Test Location!!"
+  
+      chai.request('http://localhost:5000').delete(`/locations/${location_name}`)
+        .end((err,res)=>{
+          res.should.have.status(400);
+          res.body.should.have.property('message').eql(`Cannot delete ${location_name} since it doesnt exist in database`);
+          done();
+        });
+  
+    });
+  
 
   });
+
+
+ 
 
 
 
