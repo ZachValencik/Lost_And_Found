@@ -141,16 +141,16 @@ function displayItForEdit(id){
     success: function(data){
       console.log(data);
       let str = `<h2> Update of id:${id} </h2>`;
-      str += `<input type='text' name='item_name' id='item_name' value='${data[0].item_name}'>`;
-      str += `<input type='text' name='item_category' id='item_category' value=${data[0].item_category}>`;
-      str += `<input type='text' name='item_value' id='item_value' value=${data[0].item_value}>`;
-      str += `<input type='text' name='item_desc' id='item_desc' value=${data[0].item_desc}>`;
-      str += `<input type='text' name='item_location' id='item_location' value=${data[0].item_location}>`;
-      str += `<input type='text' name='item_outside' id='item_outside' value=${data[0].item_outside}>`;
-      str += `<input type='text' name='item_room' id='item_room' value=${data[0].item_room}>`;
-      str += `<input type='text' name='found_by' id='found_by' value=${data[0].found_by}>`;
-      str += `<input type='text' name='found_by_desc' id='found_by_desc' value=${data[0].found_by_desc}>`;
-      str += `<input type='date' name='date_found' id='date_found' value=${data[0].date_found}>`;
+      str += `<input type='text' name='item_name_put' id='item_name_put' value='${data[0].item_name}'>`;
+      str += `<input type='text' name='item_category_put' id='item_category_put' value=${data[0].item_category}>`;
+      str += `<input type='text' name='item_value_put' id='item_value_put' value=${data[0].item_value}>`;
+      str += `<input type='text' name='item_desc_put' id='item_desc_put' value=${data[0].item_desc}>`;
+      str += `<input type='text' name='item_location_put' id='item_location_put' value=${data[0].item_location}>`;
+      str += `<input type='text' name='item_outside_put' id='item_outside_put' value=${data[0].item_outside}>`;
+      str += `<input type='text' name='item_room_put' id='item_room_put' value=${data[0].item_room}>`;
+      str += `<input type='text' name='found_by_put' id='found_by_put' value=${data[0].found_by}>`;
+      str += `<input type='text' name='found_by_desc_put' id='found_by_desc_put' value=${data[0].found_by_desc}>`;
+      str += `<input type='date' name='date_found_put' id='date_found_put' value=${data[0].date_found}>`;
       //str += `<label for="claimed_by_put">Claimed By</label><br>`
       str += `<input type='text' name='claimed_by_put' id='claimed_by_put' value=${data[0].claimed_by}><br>`
       //str += `<label for="claimed_desc_put">Claimed By Information</label><br>`
@@ -170,9 +170,44 @@ function displayItForEdit(id){
   })
 
 }
-
+//PUT AN ITEM
 function sendTheUpdate(id){
 alert(`updating ID:${id}`)
+let URL = `http://localhost:5000/items/${id}`
+let itemObj = {
+  item_id: id,
+  item_name: $("#item_name_put").val(),
+  item_category: $("#item_category_put").val(),
+  item_value: $("#item_value_put").val(),
+  item_desc: $("#item_desc_put").val(),
+  item_location: $("#item_location_put").val(),
+  item_outside: $("#item_outside_put").val(),
+  item_room: $("#item_room_put").val(),
+  found_by: $("#found_by_put").val(),
+  found_by_desc: $("#found_by_desc_put").val(),
+  date_found: $("#date_found_put").val(),
+  claimed_by: $("#claimed_by_put").val(),
+  claimed_desc: $("#claimed_desc_put").val()
+}
+$.ajax({
+  url: URL,
+  contentType: 'application/json',
+  type: 'PUT',
+  data : JSON.stringify(itemObj),
+  success: function (data){
+    
+    console.log(data)
+    window.location.reload();
+  },
+  error : function( xhr, status, error ) {
+    alert( "Error");
+    console.log(`AJAX ERROR`)
+    console.log( error );
+  }
+
+
+})
+
 }
 
 $(document).ready(function(){
