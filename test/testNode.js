@@ -210,7 +210,7 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
         .end((err,res)=>{
           res.should.have.status(400);
           expect(res).to.have.header('content-type', 'text/html; charset=utf-8'); 
-          expect(res.text).to.contain('Wrong Email or Password!'); // Tests for error message
+          expect(res.text).to.contain('Wrong Email or Password!'); // This is an error message displayed in the html
 
           done()
         });
@@ -227,24 +227,11 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
         .end((err,res)=>{
           res.should.have.status(400);
           expect(res).to.have.header('content-type', 'text/html; charset=utf-8'); 
-          expect(res.text).to.contain('Wrong Email or Password!'); // Tests for error message
+          expect(res.text).to.contain('Wrong Email or Password!'); // This is an error message displayed in the html
           done()
         });
 
     });
-
-
-
-/*
-    it( "Should NOT get all Items", function(done){
-
-      chai.request('http://localhost:5000').get("/itemss")
-        .end((err,res)=>{
-          res.should.have.status(404);
-          done();
-        });
-
-    });*/
 
     it( "Should NOT be able to Post An Empty Item ", function(done){
       let item = {
