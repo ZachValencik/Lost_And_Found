@@ -398,8 +398,11 @@ router.post('/items', (req, res) => {
   }
    // console.log(rows[0].floors)
     else{
+      console.log(err)
+      res.status(400)
+      res.send(err)
     }
-    console.log(err);
+    
     
   })
 

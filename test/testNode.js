@@ -184,6 +184,21 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
 
     });*/
 
+    it( "Should NOT be able to Post An Empty Item ", function(done){
+      let item = {
+      }
+      chai.request(`http://localhost:5000`).post(`/items`)
+        .send(item)
+        .end((err,res)=>{
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('sqlMessage'); //This will be the error message
+
+        done()
+        });
+
+    });
+
     
     it( "Should Not Delete An Non-exist Item", function(done){
       let item_id =9001;
