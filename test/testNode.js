@@ -135,7 +135,7 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
       chai.request('http://localhost:5000').delete(`/items/${item_id}`)
         .end((err,res)=>{
           res.should.have.status(200);
-          //res.body.should.have.property('message').eql(`Cannot delete ${item_id} since it doesnt exist in database`);
+          res.body.should.have.property('message').eql(` deleted ${item_id}`); //Positive Message
           done();
         });
 
