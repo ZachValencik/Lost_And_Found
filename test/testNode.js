@@ -144,7 +144,7 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
         found_by_desc: "['Alex Trance',324542,555-211-1212]",
         date_found: "2021-02-26"
       }
-      chai.request(`http://localhost:5000`).put(`/items/${item_id}}`)
+      chai.request(`http://localhost:5000`).put(`/items/${item_id}`)
         .send(item)
         .end((err,res)=>{
           res.should.have.status(200);
@@ -257,6 +257,31 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
           res.body.should.have.property('sqlMessage'); //This will be the error message
 
         done()
+        });
+
+    });
+
+    it( "Should Not Put a non existant Item", function(done){
+      let item_id = 9000
+      let item = {
+        item_id: 8999,
+        item_name: "Test Item!!",
+        item_category: "Test!!",
+        item_value: 10000,
+        item_desc: "A Test that will be deleted after creation!!!",
+        item_location: "BookStore!!",
+        item_outside: 0,
+        item_room: 1050,
+        found_by: 5,
+        found_by_desc: "['Alex Trance',324542,555-211-1212]",
+        date_found: "2021-02-26"
+      }
+      chai.request(`http://localhost:5000`).put(`/items/${item_id}`)
+        .send(item)
+        .end((err,res)=>{
+          res.should.have.status(400);
+          res.body.should.have.property('message').eql(`Cannot update ${item_id} since it doesnt exist in database`);
+          done()
         });
 
     });
