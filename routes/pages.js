@@ -238,28 +238,21 @@ router.get('/locations/:location_name', (req, res) => {
 
 //POST AN LOCATION
 router.post('/locations', (req, res) => {
-  /*let emp = req.body;
-  var sql = "SET @location_name = ?;SET @floor_num = ?;SET @room_num = ?; SET @hasBasement = ?; \
-  CALL LocationAdd(@location_name,@floor_num,@room_num,@hasBasement);";
-  mysqlConnection.query(sql, [emp.location_name, emp.floor_num, emp.room_num, emp.hasBasement], (err, rows, fields) => {
-      if (!err)
-          rows.forEach(element => {
-              if(element.constructor == Array)
-              res.send('Inserted location: '+element[0].location_name);
-          });
-      else
-          console.log(err);
-  })*/
   let emp = req.body;
 
   mysqlConnection.query('insert into location (location_name,floor_num,room_num,hasBasement) Values (?,?,?,?)',[emp.location_name,emp.floor_num,emp.room_num,emp.hasBasement],(err,row,fields)=>{
 
-    if(!err)
-    res.send(row)
-   // console.log(rows[0].floors)
-    else
-    console.log(err);
+    if(!err){
+
     
+    res.status(200)
+    res.send(row)
+    }
+   // console.log(rows[0].floors)
+    else{
+    res.status(200)
+    console.log(err);
+    }
   })
 
 })
@@ -286,7 +279,12 @@ router.delete('/locations/:location_name', (req, res) => {
   mysqlConnection.query(' Delete from location where location_name = ?',[req.params.location_name],(err,row,fields)=>{
     
     if(row.affectedRows!=0){
-      res.send(`Deleted ${req.params.location_name}`)
+      let message = {
+        status:200,
+        message: `Deleted ${req.params.location_name}`
+      }
+      res.status(200)
+      res.send(message)
       
     }
     else{

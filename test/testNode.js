@@ -194,6 +194,34 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
 
     });
 
+    it( "Should Post A Location", function(done){
+      let location = {
+        location_name: "Test Location",
+        floor_num: 1000,
+        room_num: "[100,200,500]",
+        hasBasement:0,
+      }
+      chai.request(`http://localhost:5000`).post(`/locations`)
+        .send(location)
+        .end((err,res)=>{
+          res.should.have.status(200);
+          done()
+        });
+
+    });
+
+    it( "Should Delete A location", function(done){
+      let location_name = "Test Location"
+
+      chai.request('http://localhost:5000').delete(`/locations/${location_name}`)
+        .end((err,res)=>{
+          res.should.have.status(200);
+          res.body.should.have.property('message').eql(`Deleted ${location_name}`); //Positive Message
+          done();
+        });
+
+    });
+
     
 
   });
