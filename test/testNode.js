@@ -296,6 +296,20 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
 
     });
 
+    it( "Should NOT get a Non-existant item", function(done){
+      let item_id = 10001;
+      chai.request(`http://localhost:5000`).get(`/item/${item_id}`)
+        .end((err,res)=>{
+          res.should.have.status(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('message').eql(`No item with id ${item_id}`);
+
+        done()
+        });
+
+    });
+
+
     it( "Should NOT be able to Post An Empty Item ", function(done){
       let item = {
       }
