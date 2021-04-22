@@ -227,7 +227,23 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
   });
 
 
-  context( "Negative Routes", function() {
+  context( "Error Routes", function() {
+      
+    
+    it( "Should NOT get a non-existant user ", function(done){
+    let user_id = 9000;
+    chai.request(`http://localhost:5000`).get(`/users/${user_id}`)
+      .end((err,res)=>{
+        res.should.have.status(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('message').eql(`No user found with ${user_id}`);
+
+
+        done()
+      });
+  
+      });
+
     it( "Should NOT Log In a normal user. Wrong Password ", function(done){
       let login = {
         email:'zvalencik01@aurora.edu',

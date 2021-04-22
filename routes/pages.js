@@ -161,15 +161,21 @@ router.get('/users', (req, res) => {
 })
 
 
-router.get('/users/:id_user', (req, res) => {
-  mysqlConnection.query('Select * from user where id_user = ?',[req.params.id_user],(err,row,fields)=>{
+router.get('/users/:user_id', (req, res) => {
+  mysqlConnection.query('Select * from user where user_id = ?',[req.params.user_id],(err,row,fields)=>{
 
-    if(!err)
-    res.send(row)
-   // console.log(rows[0].floors)
-    else
-    console.log(err);
-    
+    if(res.length>0){
+      res.status(200)
+      res.send(row)}
+    else {
+      let errorMessage = {
+        status:200,
+        message:`No user found with ${req.params.user_id}`
+      }
+      res.status(400)
+      console.log(errorMessage);
+      res.send(errorMessage);
+    }
   })
 })
 
