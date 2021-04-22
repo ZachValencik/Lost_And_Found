@@ -364,15 +364,23 @@ router.get('/items/:category', (req, res) => {
 
 })
 
-router.get('/item/:id', (req, res) => {
-  mysqlConnection.query('Select * from item where item_id = ? ',[req.params.id],(err,rows,fields)=>{
+router.get('/item/:item_id', (req, res) => {
+  mysqlConnection.query('Select * from item where item_id = ? ',[req.params.item_id],(err,rows,fields)=>{
 
-    if(!err)
-    res.send(rows)
-   // console.log(rows[0].floors)
-    else
-    console.log(err);
-    
+    if(rows.length>0)
+      res.send(rows)
+    // console.log(rows[0].floors)
+    else{
+      let errorMessage = {
+        status:400,
+        message: `No item with id ${req.params.item_id}`
+      }
+      res.status(400)
+      res.send(errorMessage)
+
+    }
+
+
   })
 
 })
