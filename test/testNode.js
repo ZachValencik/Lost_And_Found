@@ -43,6 +43,22 @@ describe('#5  Clear statement of at least 8 route variants. Demonstrate full cov
 
     });
 
+    it( "Should get one user", function(done){
+      let user_id = 1;
+      chai.request(`http://localhost:5000`).get(`/users/${user_id}`)
+        .end((err,res)=>{
+          res.should.have.status(200);
+          res.body[0].should.be.a('object');
+          res.body[0].should.have.property('user_id');
+          res.body[0].should.have.property('email');
+          res.body[0].should.have.property('password');
+          res.body[0].should.have.property('is_admin');
+
+          done()
+        });
+    
+        });
+
     it( "Should get all Items Return 200", function(done){
 
       chai.request('http://localhost:5000').get("/items")

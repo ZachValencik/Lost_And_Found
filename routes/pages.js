@@ -164,12 +164,12 @@ router.get('/users', (req, res) => {
 router.get('/users/:user_id', (req, res) => {
   mysqlConnection.query('Select * from user where user_id = ?',[req.params.user_id],(err,row,fields)=>{
 
-    if(res.length>0){
+    if(row.length>0){
       res.status(200)
       res.send(row)}
     else {
       let errorMessage = {
-        status:200,
+        status:400,
         message:`No user found with ${req.params.user_id}`
       }
       res.status(400)
@@ -178,7 +178,6 @@ router.get('/users/:user_id', (req, res) => {
     }
   })
 })
-
 /*
 app.post('/users', (req, res) => {
   let emp = req.body;
